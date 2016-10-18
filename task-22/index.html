@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		.btree {
+			display: flex;
+			flex-grow: 1;
+			justify-content: space-between;
+		/* 	margin-right: 1em; */
+			box-sizing: border-box;
+			border: 1px solid #ccc;
+			padding: 1em;
+			min-height: 150px;
+			background-color: #fff;
+		}
+		.node {
+			flex-grow: 1;
+			margin-right: 1em;
+		}
+		.node:last-child {
+			margin-right: 0;
+		}
+		.buttons {
+			margin-bottom: 1em;
+		}
+		.background {
+			background-Color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="btree" class="btree" data-index="0">
+		<div class="btree node" data-index="1">
+			<div class="btree node" data-index="2">
+				<div class="btree node" data-index="3"></div>
+				<div class="btree node" data-index="4"></div>
+			</div>
+			<div class="btree node" data-index="5">
+				<div class="btree node" data-index="6"></div>
+				<div class="btree node" data-index="7"></div>
+			</div>
+		</div>
+		<div class="btree node" data-index="8">
+			<div class="btree node" data-index="9">
+				<div class="btree node" data-index="10"></div>
+				<div class="btree node" data-index="11"></div>
+			</div>
+			<div class="btree node" data-index="12">
+				<div class="btree node" data-index="13"></div>
+				<div class="btree node" data-index="14"></div>
+			</div>
+		</div>
+	</div>
+	<div class="buttons">
+		<button id="in">中序</button>
+		<button id="pre">先序</button>
+		<button id="post">后序</button>
+	</div>
+	<script>
+		var Traverse = (function() {
+			var inOrderTraverse = function(node, callback) {
+				if (node !== null) {
+                	inOrderTraverse(node.firstElementChild, callback);
+                	callback.call(node);
+                	inOrderTraverse(node.lastElementChild, callback);
+                }
+			};
+            var preOrderTraverse = function(node, callback) {
+                if (node !== null) {
+                	callback.call(node);
+                	preOrderTraverse(node.firstElementChild, callback);
+                	preOrderTraverse(node.lastElementChild, callback);
+                }
+            };
+            var postOrderTraverse = function(node, callback) {
+                if (node !== null) {
+                	postOrderTraverse(node.firstElementChild, callback);
+                	postOrderTraverse(node.lastElementChild, callback);
+                	callback.call(node);
+                }
+            };
+            return {
+            	inOrder: inOrderTraverse,
+            	preOrder: preOrderTraverse,
+            	postOrder: postOrderTraverse
+            }
+		}());
+
+        var btree = document.querySelector('#btree');
+        var nodes = document.querySelectorAll('.btree');
+        var inBtn = document.querySelector('#in');
+        var preBtn = document.querySelector('#pre');
+        var postBtn = document.querySelector('#post');
+        var timer;
+        inBtn.addEventListener('click', function(e) {
+        	clearAnimate();
+        	timer = 0;
+        	Traverse.inOrder(btree, handler);
+        });
+        preBtn.addEventListener('click', function(e) {
+        	clearAnimate();
+            timer = 0;
+        	Traverse.preOrder(btree, handler);
+        });
+        postBtn.addEventListener('click', function(e) {
+        	clearAnimate();
+            timer = 0;
+        	Traverse.postOrder(btree, handler);
+        });
+
+        function handler() {
+        	// console.log(this)
+        	var me = this;
+            this.tId1 = setTimeout(function() {
+        		me.classList.add('background');
+        	}, timer += 500);
+        	this.tId2 = setTimeout(function() {
+        		me.classList.remove('background');
+        	}, timer += 500);
+        	
+        }
+        function clearAnimate() { // 清除动画
+        	for (var node of nodes) {
+        		// if (node.tId1 && node.tId2) {
+        			clearTimeout(node.tId1);
+        			clearTimeout(node.tId2);
+        			node.classList.remove('background');
+        		// }
+        	}
+        }
+	</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+@import "reset";
+$res: 768px;
+$margin: 20px;
+
+body {
+    display: flex;
+    flex-wrap: wrap; // 换行, 默认是no-wrap
+    flex-flow: row wrap; // flex-flow: <flex-direction> || <flex-wrap>; 默认row nowrap
+    padding: 20px;
+    margin-right: -20px;
+}
+
+div {
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    border: 1px solid #999;
+    background: #eee;
+    height: 50px;
+    color: #f00;
+}
+
+@for $i from 1 through 12 {
+    .col-xs-#{$i} {
+        $width: 100% / (12 / $i);
+        flex: $i 0 calc(#{$width} - 20px); // 插值, 否则calc无法生效
+        // flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
+        // flex-shrink为0时, 空间不足时不会自动缩小
+    }
+}
+
+@media screen and (min-width: 769px) {
+    @for $i from 1 through 12 {
+        .col-sm-#{$i} {
+            $width: 100% / (12 / $i);
+            flex: $i 0 calc(#{$width} - 20px);
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    @for $i from 1 through 12 {
+        .col-sm-#{$i} {
+            width: 100%;
+        }
+    }
+}

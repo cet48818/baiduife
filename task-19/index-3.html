@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            font-size: 12px;
+            margin: 0;
+        }
+        .queue {
+            height: 300px;
+            display: flex;
+            background: rgba(0, 255, 0, 0.1);
+            /*justify-content: space-between;*/
+            align-items: flex-end;
+        }
+        .inner {
+            display: inline-block;
+            color: #fff;
+            background: #f00;
+            padding: 5px;
+            margin-top: 10px;
+            margin-right: 5px;
+            cursor: pointer;
+            /*transition: .5s height;*/
+        }
+        .leftOut {
+            margin-left: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <input type="text" id="num-input">
+        <button id="leftIn">左侧入</button>
+        <button id="rightIn">右侧入</button>
+        <button id="leftOut" class="leftOut">左侧出</button>
+        <button id="rightOut">右侧出</button>
+        <button id="randomData">随机数</button>
+        <button id="bubbleSort">冒泡排序(从小到大)</button>
+    </div>
+    <div class="queue" id="queue">
+        <!--<div class="inner">11</div>
+        <div class="inner">12</div>-->
+    </div>
+    <script>
+        var queue = (function() {
+            var items = [],
+                wrapper,
+                leftIn = document.querySelector('#leftIn'),
+                rightIn = document.querySelector('#rightIn'),
+                leftOut = document.querySelector('#leftOut'),
+                rightOut = document.querySelector('#rightOut'),
+                inputArea = document.querySelector('#num-input'),
+                randomData = document.querySelector('#randomData'),
+                bubbleSort = document.querySelector('#bubbleSort'),
+                buttons = document.querySelectorAll('button'),
+                inputVal,
+                innerItem;
+
+            var init = function(containerId) {
+                wrapper = document.querySelector(`#${containerId}`);
+                bind();
+            };
+
+            var bind = function() {
+                // 绑定左插入
+                leftIn.addEventListener('click', function(e) { 
+                    if (checkVal()) {
+                        if (items.length === 60) {
+                            return alert('已达到上限, 无法增加!');
+                        }
+                        items.unshift(inputVal);
+                        renderQueue();
+                }
+                    
+                });
+                // 绑定右插入
+                rightIn.addEventListener('click', function(e) {
+                    if (checkVal()) {
+                        if (items.length === 60) {
+                            return alert('已达到上限, 无法增加!');
+                        }
+                        items.push(inputVal);
+                        renderQueue();
+                    }
+                    
+                });
+                // 绑定左删除
+                leftOut.addEventListener('click', function(e) {
+                    alert(items.shift());
+                    renderQueue();
+                });
+                // 绑定右删除
+                rightOut.addEventListener('click', function(e) {
+                    alert(items.pop());
+                    renderQueue();
+                });
+                // 生成随机数
+                randomData.addEventListener('click', function(e) {
+                    var num;
+                    items = [];
+                    for (var i=0; i<60; i++) {
+                        num = Math.ceil(Math.random() * (100 - 10) + 10);
+                        items.push(num);
+                        renderQueue();
+                    }
+                });
+                // 绑定排序按钮
+                bubbleSort.addEventListener('click', function(e) {
+                    
+                    if (items.length > 1) {
+                        // 禁用所有按钮
+                        for (var button of buttons) {
+                            button.setAttribute('disabled', 'disabled');
+                        }
+                        renderBubble(items);
+                    }
+                    
+                });
+                // 点击单个数据删除
+                wrapper.addEventListener('click', function(e) {
+                    if (e.target.className === 'inner') {
+                        var index = +e.target.dataset.index;
+                        items.splice(index, 1);
+                        renderQueue();
+                    }
+                });
+            };
+            // 检查输入合法性
+            var checkVal = function() {
+                inputVal = inputArea.value.trim();
+                var reg = /^\d+$/;
+                if (!reg.test(inputVal) || Number(inputVal) > 100 || Number(inputVal) < 10) {
+                    alert('必须输入10-100的数字');
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            };
+            // 渲染
+            var renderQueue = function() {
+                var innerStr = '';
+                items.forEach(function(item, index) {
+                    var height = +item * 2;
+                    innerStr += `<div class="inner" data-index="${index}" style="height:${height}px;">${item}</div>`;
+                });
+                wrapper.innerHTML = innerStr;
+                inputArea.value = '';
+            }
+            // 冒泡排序的渲染
+            var renderBubble = function(arr) {
+                var inners = wrapper.querySelectorAll('.inner');
+                var tId = null;
+                inners = Array.from(inners);
+                bubbleSort3(items, inners);
+            }
+
+            function bubbleSort3(arr, inners) {
+                var length = arr.length;
+                var time = 0;
+                for (var i=0; i<length; i++) {
+                    for (var j=0; j<length-1-i; j++) {
+                        if (arr[j] > arr[j+1]) {
+                                aux = arr[j];
+                                arr[j] = arr[j+1];
+                                arr[j+1] = aux;
+                            // 可视化排序; 
+                            ;(function(inner1, inner2, item1, item2) {
+                                setTimeout(function() {
+                                    inner1.style.height = item1 * 2 + 'px';
+                                    inner1.textContent = item1;
+                                    inner2.style.height = item2 * 2 + 'px';
+                                    inner2.textContent = item2;
+                                }, time);
+                            })(inners[j], inners[j+1], arr[j], arr[j+1]);
+                            time += 80;
+                        }
+                    }
+                }
+                // 解除按钮的禁用状态
+                setTimeout(function() {
+                    for (var button of buttons) {
+                        button.removeAttribute('disabled');
+                    }
+                }, time)
+            }
+
+            // 对数组进行冒泡排序
+            var bubble = function(arr) {
+                var length = arr.length;
+                var aux;
+                for (var i=0; i<arr.length; i++) {
+                    for (var j=0; j<arr.length-1-i; j++) {
+                        if (arr[j] > arr[j+1]) {
+                            aux = arr[j];
+                            arr[j] = arr[j+1];
+                            arr[j+1] = aux;
+                        }
+                    }
+                }
+                return arr;
+            }
+
+            return { // 返回到外部
+                init: init
+            }
+        })();
+        
+        queue.init('queue');
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+body {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/*.div3 {
+    align-self: flex-start;
+}*/
+.div4 {
+    order: -1;
+}

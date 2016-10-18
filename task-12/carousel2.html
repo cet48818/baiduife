@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            position: relative;
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+        }
+        ul {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: flex;
+        }
+        li {
+            width: 500px;
+            height: 300px;
+            background: yellow;
+            list-style: none;
+            flex-shrink: 0;
+        }
+        .slide2 {
+            background: lightgreen;
+            z-index: 1;
+        }
+        .slide3 {
+            background: pink;
+            z-index: 0;
+        }
+        .indicator {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: 99;
+        }
+        .btn1,
+        .btn2,
+        .btn3 {
+            position: absolute;
+            display: inline-block;
+            box-sizing: border-box;
+            border-right: 1px solid #fff;
+            width: 50px;
+            height: 30px;
+            background: rgba(0, 0, 0, .3);
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            text-decoration: none;
+            user-select: none;
+        }
+        .btn1 {
+            right: 100px;
+            bottom: 0;
+        }
+        .btn2 {
+            right: 50px;
+            bottom: 0;
+        }
+        .btn3 {
+            right: 0;
+            bottom: 0;
+            border-right: none;
+        }
+
+        /*.btn1:target {
+            left: 0;
+        }
+        .btn2:target {
+            left: -500px;
+        }
+        .btn3:target {
+            left: -1000px;
+        }*/
+        .animate {
+            animation: moving 8s infinite;
+        }
+        @keyframes moving {
+            0% {
+                left: 0;
+            }
+            13% {
+                left: 0;
+            }
+            33% {
+                left: -500px;
+            }
+            46% {
+                left: -500px;
+            }
+            66% {
+                left: -1000px;
+            }
+            79% {
+                left: -1000px;
+            }
+            100% {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul id="slide" class="wrapper animate">
+            <li class="slide1">11</li>
+            <li class="slide2">22</li>
+            <li class="slide3">33</li>
+        </ul>
+        <div class="indicator">
+            <a href="#slide" class="btn1">1</a>
+            <a href="#slide" class="btn2">2</a>
+            <a href="#slide" class="btn3">3</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			color: #333;
+		}
+		span {
+			user-select: none;
+		}
+		.btree {
+			display: flex;
+			flex-flow: row wrap;
+			flex-grow: 1;
+			justify-content: space-between;
+			margin: 1em;
+			box-sizing: border-box;
+			border: 1px solid #ccc;
+			padding: 1em;
+			min-height: 150px;
+			background-color: #fff;
+			cursor: pointer;
+		}
+		.node {
+			flex-grow: 1;
+			margin-right: 1em;
+		}
+		.node:last-child {
+			margin-right: 0;
+		}
+		.buttons,
+		.delete {
+			margin-bottom: 1em;
+		}
+		.background {
+		/* 	color: white; */
+			background-Color: red;
+		}
+		.background>span {
+			color: white;
+			/* background-Color: red; */
+		}
+		.traverse, 
+		.delete {
+			display: block;
+			margin-top: 1em;
+		}
+		.selected {
+			color: orange;
+		}
+		.node-selected {
+			background: cyan;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="btree" class="btree">
+	<span>Super</span>
+		<div class="btree node">
+			<span>Cat</span>
+			<div class="btree node">
+				<span>Apple</span>
+			</div>
+			<div class="btree node">
+				<span>Phone</span>
+				<div class="btree node">
+					<span>Poor</span>
+				</div>
+				<div class="btree node">
+					<span>Pig</span>
+				</div>
+				<div class="btree node">
+					<span>Cola</span>
+				</div>
+				<div class="btree node">
+					<span>Soccer</span>
+				</div>
+			</div>
+			<div class="btree node">
+				<div class="btree node">
+					<span>Book</span>
+				</div>
+				<div class="btree node">
+					<span>School</span>
+				</div>
+			</div>
+		</div>
+		<div class="btree node">
+		    <span>Note</span>
+		    <div class="btree node">
+		    	<span>Human</span>
+		    	<div class="btree node">
+		    		<span>Code</span>
+		    	</div>
+		    	<div class="btree node">
+		    		<span>Operate</span>
+		    	</div>
+		    	<div class="btree node">
+		    		<span>Man</span>
+		    	</div>
+		    </div>
+		    <div class="btree node">
+		    	<span>Program</span>
+		    	<div class="btree node">
+		    		<span>Bemant</span>
+		    		<div class="btree node">
+		    			<span>Cat</span>
+		    		</div>
+		    		<div class="btree node">
+		    			<span>Glass</span>
+		    		</div>
+		    	</div>
+		    </div>
+		</div>
+		<div class="btree node">
+			<span>Fish</span>
+		</div>
+	</div>
+	<div class="buttons">
+		<input type="text" id="searchArea" placeholder="请输入搜索关键字">
+		<button id="searchBtn">搜索</button>
+		<button id="traverse" class="traverse">开始遍历</button>
+		<button id="delete" class="delete">删除节点</button>
+		<input type="text" id="addArea" placeholder="添加节点">
+		<button id="addNode" class="addNode">添加节点</button>
+	</div>
+	<script>
+	    var tree = document.querySelector('#btree');
+	    var timer = 0;
+        var traverseBtn = document.querySelector('#traverse');
+        var inputVal = document.querySelector('#searchArea');
+        var searchBtn = document.querySelector('#searchBtn');
+        var allNodes = document.querySelectorAll('.btree');
+        var deleteBtn = document.querySelector('#delete');
+        var addArea = document.querySelector('#addArea');
+        var addNode = document.querySelector('#addNode');
+        var length = allNodes.length;
+        var flag = false; // 判断搜索是否有结果的布尔值
+        var amount = 0; // 判断是否遍历完成的计数器
+        const INTERVAL = 300;
+
+		var Tree = (function() {
+            var nodeList = Array.from(tree.children);
+			var traverse = function(node, callback, word) {
+				word = word || null;
+				if (node.classList.contains('btree') && !node.classList.contains('node')) { // 根节点
+					callback.call(node, word);
+				}
+                if (node.lastElementChild.classList.contains('btree')) { // 是否有子节点
+                	var nodeLis = node.children;
+                	for (node of nodeLis) {
+                		if (node.classList.contains('btree')) {
+                			callback.call(node, word);
+                			traverse(node, callback, word);
+                		}
+                	}
+                }
+                
+			};
+
+            return {
+            	traverse: traverse,
+            	search: traverse
+            }
+		}());
+
+		
+        traverseBtn.addEventListener('click', function(e) {
+        	// 遍历
+        	for (node of allNodes) {
+                	node.firstElementChild.classList.remove('selected');
+                }
+            Tree.traverse(tree, handler);
+            this.setAttribute('disabled', 'disabled');
+            searchBtn.setAttribute('disabled', 'disabled');
+        });
+        searchBtn.addEventListener('click', function(e) {
+        	// 搜索
+        	var word = inputVal.value.trim();
+        	if (word !== '') {
+        		// 重置搜索结果
+                for (node of allNodes) {
+                	node.classList.remove('selected');
+                }
+        		Tree.search(tree, handler, word);
+                this.setAttribute('disabled', 'disabled');
+                traverseBtn.setAttribute('disabled', 'disabled');
+        	}
+        });
+        // 绑定节点点击事件
+        tree.addEventListener('click', function(e) {
+        	var target = e.target;
+        	if (target.tagName === 'SPAN') {
+        		target = target.parentNode;
+        	}
+            if (target.classList.contains('btree')) {
+            	// if (!target.classList.contains('node-selected')) {
+            	// 	target.classList.add('node-selected');
+            	// } else {
+            	// 	target.classList.remove('node-selected');
+            	// }
+            	target.classList.toggle('node-selected');
+            }
+
+        });
+        // 删除
+        deleteBtn.addEventListener('click', function(e) {
+        	allNodes = document.querySelectorAll('.btree');
+        	for (node of allNodes) {
+        		if (node.classList.contains('node-selected')) {
+        			node.parentNode.removeChild(node);
+        		}
+        	}
+        });
+
+        // 添加
+        addNode.addEventListener('click', function(e) {
+            var value = addArea.value;
+            for (node of allNodes) {
+        		if (node.classList.contains('node-selected')) {
+        			var div = document.createElement('div');
+        			div.className = 'btree node';
+        			div.innerHTML = `<span>${value}</span>`;
+                    node.appendChild(div);
+        		}
+        	}
+        });
+
+		function handler(word) {
+			// console.log(word)
+            var me = this;
+            amount++;
+            this.tId1 = setTimeout(function() {
+            	if (word) {
+            		if (me.firstElementChild && me.firstElementChild.nodeName === 'SPAN') {
+            			if (word.toLowerCase() === me.firstElementChild.textContent.toLowerCase()) {
+            				me.firstElementChild.classList.add('selected');
+            				flag = true;
+            			}
+            		}
+            	}
+        		me.classList.add('background');
+        	}, timer += INTERVAL);
+        	this.tId2 = setTimeout(function() {
+        		me.classList.remove('background');
+            }, timer += INTERVAL);
+            if (amount === length) {
+            	this.tId3 = setTimeout(function() {
+            		if (word && flag === false) {
+            			alert('没有找到要搜索的内容!');
+            		}
+	        		traverseBtn.removeAttribute('disabled');
+	        		inputVal.value = '';
+	                searchBtn.removeAttribute('disabled');
+	                timer = 0;
+	                amount = 0;
+	            	flag = false;
+                }, timer += INTERVAL);
+            }
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            font: 12px 'Microsoft YaHei' arial sans-serif;
+        }
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+        textarea {
+            resize: none;
+        }
+        .wrapper {
+            width: 640px;
+            margin: 0 auto;
+        }
+        .tag-area {
+            margin: 20px;
+        }
+        .favorite-area {
+            margin: 20px;
+        }
+        .tag {
+            display: inline-block;
+            margin-top: 10px;
+            margin-right: 10px;
+            background-color: #85caff;
+            padding: 3px 5px;
+        }
+        .to-delete {
+            background-color: #f00;
+        }
+        .to-delete::before {
+            content: '删除';
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="tag-area">
+        <label for="tagInput">Tag:</label>
+        <input type="text" id="tagInput" placeholder="用回车或者逗号输入">
+        <div id="tagContainer" class="tags">
+            <a href="javascript:;" class="tag">看书</a>
+            <a href="javascript:;" class="tag">写字</a>
+        </div>
+        </div>
+        <div class="favorite-area">
+            <textarea name="" id="favorites" cols="30" rows="10" placeholder="最多10项目; 可输入中英文或者数字, 非法字符会被过滤掉; 多个字符之间可以用空格或逗号隔开"></textarea>
+            <button id="confirm">确认兴趣爱好</button>
+            <div id="favContainer" class="tags">
+                <a href="javascript:;" class="tag">打球</a>
+                <a href="javascript:;" class="tag">跳舞</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>

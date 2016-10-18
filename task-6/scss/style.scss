@@ -1,0 +1,453 @@
+@import "reset";
+$red: #d45d5c;
+$green: #75b86b;
+$lGreen: #72b16a;
+$lRed: #cc8091;
+$dYellow: #d2994f;
+$yellow: #f5e327;
+$top: 10px;
+$lBlack: #555;
+
+body {
+    background-color: #ccc;
+}
+.h-mid {
+    margin: 0 auto;
+}
+@mixin pos-h-middle($supW, $subW) {
+    left: ($supW / 2);
+    margin-left: - ($subW / 2);
+}
+@mixin h-line($width:100%, $height:2px, $color:#938e8e, $direction:bottom) {
+    position: absolute;
+    left: 0;
+    width: $width;
+    border-#{$direction}: $height solid $color;
+}
+@mixin v-line($width, $height, $color) {
+    position: absolute;
+    width: $width;
+    height: $height;
+    background-color: $color;
+}
+@mixin shade($color, $opacity, $pos:left, $width:191px, $height:301px) {
+    position: absolute;
+    #{$pos}: 0;
+    bottom: 0;
+    width: $width;
+    height: $height;
+    background-color: $color;
+    opacity: ($opacity / 100);
+    filter: alpha(opacity=$opacity);
+    
+}
+@mixin title-h3($color) {
+    margin: 10px 0 10px 0;
+    font: {
+        size: 16px;
+        style: bold;
+    }
+    text-decoration: underline;
+    color: $color;
+}
+
+.wrapper {
+    position: relative;
+    width: 980px;
+    height: 1386px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+.header {
+    position: absolute;
+    top: 0;
+    @include pos-h-middle(980px, 892px);
+    width: 892px;
+    height: 60px;
+    @extend .h-mid;
+    .header-line {
+        @include h-line();
+        bottom: -1px;
+    }
+    .logo {
+        width: 110px;
+        height: 61px;
+        color: #fff;
+        background: $red;
+        
+        span {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            vertical-align: middle;
+        }
+    }
+    small {
+        position: absolute;
+        bottom: 4px;
+        right: 4px;
+        color: $red;
+    }
+}
+.main {
+    position: absolute;
+    top: 97px;
+    width: 892px;
+    height: 1188px;
+    @include pos-h-middle(980px, 892px);
+    .img-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 641px;
+        height: 301px;
+        img {
+            width: 641px;
+            height: 301px;
+        }
+        .shade-l {
+            @include shade($lRed, 70, left);  
+        }
+        .shade-r {
+           @include shade($green, 70, right);
+        }
+    }
+    .aside-top {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 205px;
+        height: 300px;
+        padding-top: $top;
+        .s-line {
+            @include h-line(203px, 2px, $lRed);
+            top: 0;
+        }
+        .u-line {
+            @include h-line(70px, 2px, #555);
+            top: 33px + $top;
+        }
+        .u-line-2 {
+            @include h-line(130px, 2px, #555);
+            top: 75px + $top;
+        }
+        h3 {
+            // margin-top: $marTop;
+            line-height: 40px;
+            font-size: 18px;
+            // text-decoration: underline;
+            &:first-letter {
+                font-size: 24px;
+            }
+            color: $lBlack;
+        }
+        p {
+            font: italic 12px helvetica arial sans-serif;
+            color: #676767;
+        }
+        strong {
+            font: {
+                family: helvetica;
+                size: 116px;
+                style: italic;
+            }
+            color: $green;
+        }
+        .title-1,
+        .title-2 {
+            position: absolute;
+            color: $lRed;
+        }
+        .title-1 {
+            bottom: 0;
+            left: 0;
+            font-size: 55px;
+        }
+        .title-2 {
+            left: 80px;
+            bottom: 22px;
+            font-size: 21px;
+        }
+        small {
+            position: absolute;
+            left: 80px;
+            bottom: 9px;
+            color: $lBlack;
+        }
+    }
+
+    .mid-content {
+        position: absolute;
+        top: 330px;
+        left: 0;
+        width: 641px;
+        height: 220px;
+
+        .content {
+            position: absolute;
+            top: 0;
+
+        }
+        .content-1 {
+            width: 230px;
+            left: 0;
+            h3 {
+                @include title-h3($green);
+            }
+            p {
+                line-height: 1.4;
+            }
+        }
+        .content-2 {
+            width: 210px;
+            left: 255px;
+            h3 {
+                @include title-h3($dYellow);
+            }
+        }
+        .content-3 {
+            width: 215px;
+            left: 488px;
+            h3 {
+                @include title-h3($lRed);
+            }
+            p {
+                line-height: 1.7;
+            }
+            .what-dir {
+                margin-top: 25px;
+            }
+            span {
+                color: $lRed;
+                font-style: italic;
+            }
+        }
+    }
+    .section-3 {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 415px;
+        height: 606px;
+        .main-title {
+            height: 154px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            h3,
+            h4 {
+                font: {
+                    size: 34px;
+                    // weight: bold;
+                }     
+                color: #11456b; 
+
+                strong {
+                    font: {
+                        size: 54px;
+                        // weight: bold;
+                        style: italic;
+                    }
+                    color: $yellow;
+                }     
+            }
+            .side-line {
+                @include h-line(415px, 2px, #11456b);
+                bottom: 0;
+            }
+        }
+        .sec-content {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 606px - 154px;           
+            .article {
+                margin: 20px;
+                p {
+                    line-height: 1.6;
+                }
+                p:nth-child(2),
+                p:nth-child(3) {
+                    text-indent: 2em;
+                }
+ 
+                &:first-letter {
+                    float: left;
+                    margin: 5px;
+                    color: $yellow;
+                    font-size: 70px;
+                    line-height: 70px;
+                }
+            }
+            img {
+                float: right;
+                margin: 20px 0 0 10px;
+                width: 167px;
+                height: 288px;
+            }
+        }
+    }
+    .section-4 {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 458px;
+        height: 606px;
+        .img-container {
+            position: relative;
+            left: 0;
+            top: 0;
+            width: 458px;
+            height: 257px;
+            img {
+                width: 458px;
+                height: 257px;
+            }
+            .shade-b {
+                @include shade(#000, 50, left, 458px, 60px);
+
+            }
+            .line-g {
+                @include v-line(3px, 44px, $lGreen);
+                bottom: 7px;
+                left: 38px;
+            }
+            h3 {
+                position: absolute;
+                left: 50px;
+                bottom: 15px;
+                font-weight: normal;
+                strong {
+                    font-size: 26px;
+                    color: #fff;
+                }
+                font-style: italic;
+                color: $lGreen;
+            }
+        }
+        .r-bottom {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 458px;
+            height: 318px;
+            background: #eeedd6;
+            .b-top {
+                padding-top: 8px;
+                p {
+                    width: 410px;
+                    font-size: 14px;
+                    margin: 22px 0 0 32px;
+                    .triangle {
+                        display: inline-block;
+                        width: 0;
+                        height: 0;
+                        border: {
+                            left: 5px solid transparent;
+                            right: 5px solid transparent;
+                            bottom: 10px solid #10446b;
+                        }
+                        margin-right: 5px;
+                    }
+                    span {
+                        float: right;
+                        font-size: 12px;
+                        font-style: italic;
+                    }
+            }
+            }
+            .b-left {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 260px;
+                height: 160px;
+                background: #d45d5c;
+                color: #fff;
+                strong {
+                    position: absolute;
+                    left: 10px;
+                    top: 20px;
+                    font-size: 100px;
+                }
+                .line-p {
+                    position: absolute;
+                    right: 0;
+                    top: 40px;
+                    width: 180px;
+                    height: 86px;
+                    border-left: 2px solid #fff;
+                    p {
+                        margin-left: 10px;
+                    }
+                    .big {
+                        margin-bottom: 3px;
+                        font: {
+                            size: 19px;
+                            style: italic;
+                        }
+                    }
+                    .small {
+                        margin-top: 5px;
+                    }
+                }
+
+            }
+            .b-right {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 168px;
+                height: 130px;
+                padding: 15px;
+                .quotation {
+                    position: absolute;
+                    display: block;
+                    width: 26px;
+                    height: 22px;
+                    background: url('../images/quo.png') no-repeat;
+                }
+                .quo-l {
+                    left: 16px;
+                    top: 8px;
+                }
+                .quo-r {
+                    right: 22px;
+                    bottom: 38px;
+                    background-position: top right;
+                }
+                p {
+                    position: absolute;
+                    left: 16px;
+                    top: 20px;
+                    width: 164px;
+                    height: 94px;
+                    text-indent: 3em;
+                    text-align: justify;
+                    font-style: italic;
+                    line-height: 1.3;
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    @include pos-h-middle(980px, 892px);
+    width: 892px;
+    height: 60px;
+    @extend .h-mid;
+    .footer-line {
+        @include h-line($width:100%, $height:1px, $color:#938e8e, $direction:top);
+        top: -1px;
+    }
+
+    small {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        color: $red;
+    }
+}

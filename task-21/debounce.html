@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            height: 8000px;
+        }
+    </style>
+</head>
+<body>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+    'use strict'
+    function throttle(method, context) {
+        console.log(method.tid)
+        if (!method.tid) {
+            method.tid = setTimeout(function() {
+                method.call(context);
+                method.tid = false;
+            }, 500);
+        }
+        
+    }
+    function debounce(method, context) {
+        console.log(method.tId);
+        clearTimeout(method.tId);
+        method.tId = setTimeout(function() {
+            method.call(context);
+        }, 500);
+    }
+    
+    function print1() {
+        console.log('throttle!');
+    }
+    function print2() {
+        console.log('debounce!');
+    }
+
+    window.onscroll = function() {
+        // throttle(print1);
+        debounce(print2);
+    }
+    </script>
+</body>
+</html>

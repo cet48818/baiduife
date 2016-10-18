@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		a {
+			color: #333;
+			text-decoration: none;
+		}
+		ul,
+		li {
+			list-style: none;
+		}
+		.open::before {
+			content: '-';
+		}
+		.close::before {
+			content: '+';
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<ul>
+			<li>
+			    <a class="open" href="javascript:;">前段工程师</a>
+                <ul>
+                	<li><a class="open" href="javascript:;">HTML</a></li>
+                	<li>
+                	    <a class="open" href="javascript:;">CSS</a>
+                	    <ul>
+                	    	<li><a href="javascript:;">SASS</a></li>
+                	    	<li><a href="javascript:;">LESS</a></li>
+                	    	<li><a href="javascript:;">POSTCSS</a></li>
+                	    </ul>
+                	</li>
+                	<li><a class="close" href="javascript:;">JAVASCRIPT</a></li>
+                </ul>
+			</li>
+			<li>
+				<a class="open" href="javascript:;">后端工程师</a>
+				<ul>
+					<li>
+					    <a class="open" href="javascript:;">PHP</a>
+                        <ul>
+                        	<li><a href="javascript:;">Thinkphp</a></li>
+                        	<li><a href="javascript:;">Yii</a></li>
+                        </ul>
+					</li>
+					<li>
+					    <a class="open" href="javascript:;">JSP</a>
+					    <ul>
+					    	<li><a href="javascript:;">Spring</a></li>
+					    	<li><a href="javascript:;">Hibernate</a></li>
+					    </ul>
+					</li>
+					<li><a href="javascript:;">PYTHON</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+<!-- 	<script src="script.js"></script>
+	<script>
+		var root = Tree.insertTo('#container');
+	</script> -->
+</body>
+</html>
