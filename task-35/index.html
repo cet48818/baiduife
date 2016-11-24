@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	    button {
+	    	box-sizing: border-box;
+	    	border: 1px solid #ccc;
+	    	border-radius: 5px;
+	    	background-color: #fff;
+	    	color: #666;
+	    }
+        button:disabled {
+        	color: #ccc;
+        }
+		.main {
+			position: relative;
+			margin: 100px auto 50px;
+			width: 400px;
+			height: 400px;
+			border: 2px solid #333;
+		}
+		.order {
+			position: absolute;
+			left: 0;
+			bottom: -20px;
+		}
+		.hori-num {
+			position: absolute;
+			left: 5px;
+			top: -35px;
+			font-size: 24px;
+		}
+		.hori-num span {
+			margin-right: 28px;
+		}
+		.verti-num {
+			position: absolute;
+			left: -35px;
+			top: 5px;
+			font-size: 24px;
+		}
+		.verti-num span {
+			display: block;
+			text-align: right;
+			margin-bottom: 13px;
+		}
+		.grids {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 400px;
+			height: 400px;
+		}
+		.grid {
+			float: left;
+			width: 40px;
+			height: 40px;
+			box-sizing: border-box;
+			border: 1px solid #ccc;
+		}
+		.square {
+			position: absolute;
+            left: 0;
+            top: 0;
+			width: 40px;
+			height: 40px;
+			background: red;
+			transition: 1s;
+		}
+		.square-front {
+			width: 40px;
+			height: 10px;
+			background: blue;
+		}
+		.introduction {
+			font-size: 12px;
+			color: #555;
+		}
+		.input-area {
+			box-sizing: border-box;
+			width: 300px;
+			height: 162px;
+			position: absolute;
+			top: 50px;
+			left: 20px;
+			display: block;
+			border: none;
+			padding-left: 6px;
+			resize: none;
+			background: #000;
+			color: green;
+			font-size: 16px;
+			line-height: 1.4;
+		}
+		.line-area {
+            position: absolute;
+            left: 0;
+            top: 50px;
+            width: 20px;
+            box-sizing: border-box;
+            height: 162px;
+            background: #aaa;
+            text-align: center;
+            font-size: 16px;
+            overflow: hidden;
+		}
+		.line-area span {
+			display: block;
+			color: #fff;
+			font-size: 16px;
+			line-height: 1.4;
+		}
+		.line-area span.error {
+			border-radius: 50%;
+			background: red;
+		}
+		.btn-area {
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		.submitBtn,
+		.refresh {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 60px;
+			height: 30px;
+		}
+		.refresh {
+			left: 70px;
+		}
+	</style>
+</head>
+<body>
+    <p class="introduction">
+			    GO：向蓝色边所面向的方向前进一格（一格等同于正方形的边长）<br>
+				TUN LEF：向左转（逆时针旋转90度）<br>
+                TUN RIG：向右转（顺时针旋转90度）<br>
+                TUN BAC：向右转（旋转180度）<br>
+                TRA LEF：向屏幕的左侧移动一格，方向不变<br>
+			    TRA TOP：向屏幕的上面移动一格，方向不变<br>
+			    TRA RIG：向屏幕的右侧移动一格，方向不变<br>
+			    TRA BOT：向屏幕的下面移动一格，方向不变<br>
+			    MOV LEF：方向转向屏幕左侧，并向屏幕的左侧移动一格<br>
+			    MOV TOP：方向转向屏幕上面，向屏幕的上面移动一格<br>
+			    MOV RIG：方向转向屏幕右侧，向屏幕的右侧移动一格<br>
+			    MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格<br>
+			    点击执行时，依次逐条执行所有命令<br>
+                对于GO，TRA以及MOV指令增加可以移动格子数量的参数，例如<br>
+                GO 3：向当前方向前进三格<br>
+			    TRA TOP 2：向屏幕上方平移两格<br>
+			    MOV RIG 4：方向转向屏幕右侧，向屏幕的右侧移动四格<br>
+
+
+    </p>
+	<div class="wrapper">
+		<div class="main">
+		<div class="hori-num"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+		<div class="verti-num"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+		<div class="grids">
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+		</div>
+		    <div class="square">
+		    	<div class="square-front"></div>
+		    </div>
+			<div class="order">
+                <div class="btn-area">
+                	<button class="submitBtn" type="submit">执行</button>
+				    <button class="refresh">清空</button>
+                </div>
+				
+				<div class="line-area">
+				<!-- 	<span class="error">1</span>
+					<span>2</span>
+					<span>3</span>
+					<span class="error">4</span>
+					<span class="error">5</span>
+					<span>6</span>
+					<span>7</span>
+		            <span>8</span> -->
+				</div>
+				<textarea name="inputArea" class="input-area"></textarea> 
+			</div>
+		</div>
+		
+		
+
+	</div>
+	<script>
+		var square = document.querySelector('.square');
+		var squareFront = square.querySelector('.square-front');
+		var inputArea = document.querySelector('.input-area');
+		var btn = document.querySelector('.submitBtn');
+		var refreshBtn = document.querySelector('.refresh');
+		var container = document.querySelector('.main');
+		var lineArea = document.querySelector('.line-area');
+		var transitionFlag;
+		var spanCols;
+		var valueArr;
+        
+        refreshBtn.addEventListener('click', function(e) {
+            inputArea.value = '';
+        });
+
+		btn.addEventListener('click', function(e) {
+            this.disabled = true;
+			valueArr = inputArea.value.toLowerCase().split(/\n/);
+			var delay = 0;
+			var me = this;
+			transitionFlag = false;
+			spanCols = lineArea.querySelectorAll('span');
+            valueArr.forEach(function(value, index) {
+            	value = value.trim();
+                if (value.substr(0, 2) === 'go') {
+                    (function(delayTime, value, index) {
+	                   return setTimeout(function() {
+	                   	    var go = MovingSquare.go(square, container, value.substring(2));
+	                        if (!go) { // 
+	                       	    spanCols[index].classList.add('error');
+	                        }
+	                        if (index === valueArr.length - 1) {
+		                    	transitionFlag = true;
+                                if (!go) { // 没有执行动画
+                                    me.disabled = false;
+                                }
+		                    }
+	            	   }, delayTime);
+            	   }(delay, value, index));
+                    delay += 1000;
+                } else if (value.substr(0, 3) === 'tun') {
+                	(function(delayTime, value, index) {
+                    return setTimeout(function() {
+                        if (!MovingSquare.turn(value.substr(4))) {
+                        	spanCols[index].classList.add('error');
+                        	// me.disabled = false;
+                        }
+                        if (index === valueArr.length - 1) {
+	                    	transitionFlag = true;
+	                    }
+                	}, delayTime);
+                	}(delay, value, index));
+                	delay += 1000;
+                } else if (value.substr(0, 3) === 'tra') {
+               	    (function(delayTime, value, index) {
+                        return setTimeout(function() {
+               	    	if (!MovingSquare.trace(square, container, value.substring(3))) {
+               	    		spanCols[index].classList.add('error');
+               	    		// me.disabled = false;
+               	    	}
+               	    	if (index === valueArr.length - 1) {
+	                    	transitionFlag = true;
+	                    }
+               	    }, delayTime);
+               	    }(delay, value, index));
+               	    delay += 1000;
+               	} else if (value.substr(0, 3) === 'mov') {
+               	    (function(delayTime, value, index) {
+               	    	return setTimeout(function() {
+               	    	    if (!MovingSquare.move(square, container, value.substring(3))) {
+               	    	    	spanCols[index].classList.add('error');
+               	    	    	me.disabled = false;
+               	    	    }
+               	    	    if (index === valueArr.length - 1) {
+		                    	transitionFlag = true;
+		                    }
+               	    }, delayTime);
+               	    }(delay, value, index));
+               	    delay += 1000;
+               	} else {
+                	if (spanCols[0]) {
+                		spanCols[index].classList.add('error');
+                	}
+                    me.disabled = false;
+                }
+            });
+            e.preventDefault(); // 阻止表单提交
+		});
+
+		square.addEventListener('transitionend', function(e) {
+			var timer = valueArr.length > 1? 1000: 0; // timer为0, 对应只执行一个动作命令的状况; timer为1000, 对应执行多个命令的状况
+			if (transitionFlag === true) {
+				setTimeout(function() {
+                    btn.disabled = false; // 动画停止后才能按下按钮; 
+				}, timer);
+			}
+            
+		});
+
+
+		var inputAreaDisplay = (function() {
+            inputArea.addEventListener('keyup', function(e) {
+	            // debounce(handleInput, this);
+	            handleInput.call(this);
+	        });
+	        inputArea.addEventListener('focus', function(e) {
+	            if (!this.value) {
+	            	lineArea.innerHTML = '<span data-index="0">1</span>';
+	            }
+	        });
+	        inputArea.addEventListener('blur', function(e) { 
+	            if (!this.value) {
+	            	lineArea.innerHTML = '';
+	            }
+	        });
+	        inputArea.addEventListener('scroll', function(e) {
+                lineArea.scrollTop = inputArea.scrollTop;
+	        });
+
+	        // var debounce = function(method, context) {
+        	// // debounce
+	        // 	clearTimeout(method.tId);
+	        // 	method.tId = setTimeout(function() {
+	        // 		method.call(context);
+	        // 	}, 100);
+	        // }
+	        
+	    var handleInput = function() {
+        	var value = this.value;
+            var arr = value.split(/\n/);
+            var str = '';
+            arr.forEach(function(item, index) {
+            	str += `<span data-index="${index}">${index+1}</span>`;
+            });
+            lineArea.innerHTML = str;
+            lineArea.scrollTop = lineArea.scrollHeight - lineArea.clientHeight;
+	        }
+        }());
+		
+        var MovingSquare = (function() {
+			var initDeg = 0;
+
+            var turn = function(direction) {
+                switch (direction) {
+                	case 'lef':
+                	    function *changeDeg() {
+                            initDeg -= 90;
+                            var deg = yield initDeg;
+                            if (deg === -360) {
+                            	initDeg = 0;
+                            }
+                	    }
+                	    var generator = changeDeg();
+                        var val = generator.next().value;
+                        square.style.setProperty('transform', `rotate(${val}deg)`);
+                        generator.next();
+                	    break;
+                	case 'rig':
+                        var promise = new Promise(function(resolve, reject) {
+                            initDeg += 90;
+                            resolve(initDeg);
+                        });
+                        promise
+                        .then(function(deg) {
+                            square.style.setProperty('transform', `rotate(${deg}deg)`);
+                        })
+                        .then(function(deg) {
+                        	if (deg === 360) {
+                        		initDeg = 0;
+                        	}
+                        })
+                	    break;
+                	case 'bac':
+                	    initDeg += 180;
+                	    if (initDeg === 360 || initDeg === 450) {
+                	    	initDeg -= 360;
+                	    }
+                	    square.style.setProperty('transform', `rotate(${initDeg}deg)`);
+                        break;
+                	default:
+                	    return false;
+                }
+                return true;
+            };
+
+            var go = function(square, container, steps) {
+               var direction;
+               var steps = steps.trim();
+               if (initDeg === 0) {
+                  direction = 'top';
+               } else if (initDeg === 90 || initDeg === -270) {
+                   direction = 'rig';
+               } else if (initDeg === -90 || initDeg === 270) {
+                   direction = 'lef';
+               } else { // 180 || -180
+                   direction = 'bot';
+               }
+               if (!baseMoving(direction, steps)) {
+               	   return false;
+               }
+               return true;
+            };
+
+            var trace = function(square, container, params) {
+                // 移动一格, 方向不变
+                var paramsArr = params.trim().split(/ +/);
+                // paramsArr是数组, 第一位是方向, 第二位是步数; 如果没有步数则在baseMoving函数处理
+                if (!baseMoving(paramsArr[0], paramsArr[1])) {
+                	return false;
+                }
+                return true;
+            };
+
+            var move = function(square, container, params) {
+                // 转向以后, 移动一格
+                var paramsArr = params.trim().split(/ +/);
+                var curDirection;
+                var direction = paramsArr[0];
+                var steps = paramsArr[1];
+                if (initDeg === 0) {
+                    curDirection = 'top';
+                } else if (initDeg === 90 || initDeg === -270) {
+                    curDirection = 'rig';
+                } else if (initDeg === -90 || initDeg === 270) {
+                    curDirection = 'lef';
+                } else { // 180 || -180
+                    curDirection = 'bot';
+                }
+                if (curDirection !== direction) {
+               	    switch (curDirection) {
+               	    	case 'top':
+               	    	    if (direction === 'lef') {
+               	    	    	turn('lef');
+               	    	    } else if (direction === 'rig') {
+               	    	    	turn('rig');
+               	    	    } else if (direction === 'bot') {
+               	    	    	turn('bac');
+               	    	    } else {
+               	    	    	return false;
+               	    	    }
+               	    	    break;
+               	    	case 'rig':
+               	    	    if (direction === 'top') {
+               	    	    	turn('lef');
+               	    	    } else if (direction === 'bot') {
+               	    	    	turn('rig');
+               	    	    } else if (direction === 'lef') {
+               	    	    	turn('bac');
+               	    	    } else {
+               	    	    	return false;
+               	    	    }
+               	    	    break;
+               	    	case 'lef':
+               	    	    if (direction === 'top') {
+               	    	    	turn('rig');
+               	    	    } else if (direction === 'bot') {
+               	    	    	turn('lef');
+               	    	    } else if (direction === 'rig') {
+               	    	    	turn('bac');
+               	    	    } else {
+               	    	    	return false;
+               	    	    }
+               	    	    break;
+               	    	case 'bot':
+               	    	    if (direction === 'lef') {
+               	    	    	turn('lef');
+               	    	    } else if (direction === 'rig') {
+               	    	    	turn('rig');
+               	    	    } else if (direction === 'top') {
+               	    	    	turn('bac');
+               	    	    } else {
+               	    	    	return false;
+               	    	    }
+               	    	    break;
+               	    }
+                }
+                
+               	if (!baseMoving(direction, steps)) {
+                	return false;
+                }
+                return true;
+            };
+
+            function baseMoving(direction, steps) {
+            	var width = square.offsetWidth;
+            	var offset;
+            	var border = container.clientWidth - width;
+            	steps = !steps ? 1: parseInt(steps);
+                if (isNaN(steps)) {
+                	return false;
+                }
+            	switch (direction) {
+        		case 'lef':
+        		    if (square.offsetLeft === 0) {
+        		    	return false;
+        		    }
+                    offset = square.offsetLeft - width * steps;
+                    if (offset < 0) {
+                        offset = 0;
+                    }
+                    square.style.left = offset + 'px';
+        		    break;
+        		case 'top':
+        		    if (square.offsetTop === 0) {
+        		    	return false;
+        		    }
+                    offset = square.offsetTop - width * steps;
+                    if (offset < 0) {
+                    	offset = 0;
+                    }
+                    square.style.top = offset + 'px';
+        		    break;
+                case 'rig':
+                    if (square.offsetLeft === border) {
+                    	return false;
+                    }
+                    offset = square.offsetLeft + width * steps;
+                    if (offset > border) {
+                    	offset = border;
+                    }
+                    square.style.left = offset + 'px';
+        		    break;
+                case 'bot':
+                    if (square.offsetTop === border) {
+                    	return false;
+                    }
+                    offset = square.offsetTop + width * steps;
+                    if (offset > border) {
+                    	offset = border;
+                    }
+                    square.style.top = offset + 'px';
+        		    break;
+        		default:
+        		    return false;
+        	    }
+        	    return true;
+            }
+
+            return {
+            	turn: turn,
+            	go: go,
+            	trace: trace,
+            	move: move
+            }
+		}());
+	</script>
+</body>
+</html>

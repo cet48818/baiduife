@@ -7,6 +7,7 @@
 		body {
 			margin: 0;
 			padding: 0;
+			font-size: 16px;
 		}
 		a {
 			color: #333;
@@ -16,57 +17,219 @@
 		li {
 			list-style: none;
 		}
+		.result {
+			color: red;
+		}
+		.item:hover .delete-item,
+		.item:hover .add-item {
+            display: inline;
+		}
+		/* 普通相邻选择器(无论是否直接相连) */
+		.open~ul {
+			display: block;
+		}
 		.open::before {
 			content: '-';
+			display: inline-block;
+			margin-right: .2em;
+		}
+		.close~ul {
+			display: none;
 		}
 		.close::before {
 			content: '+';
+			display: inline-block;
+			margin-right: .2em;
+		}
+		.add-item,
+		.delete-item {
+			font-size: 12px;
+			margin-left: .5em;
+			color: #888;
+			display: none;
 		}
 	</style>
 </head>
 <body>
+    <div class="search">
+			<input type="text" id="searchArea">
+			<button id="searchBtn">搜索</button>
+		</div>
 	<div class="container">
-		<ul>
+<!-- 		<ul id="itemList" class="item-list">
 			<li>
-			    <a class="open" href="javascript:;">前段工程师</a>
+			    <a class="item open" href="javascript:;">前端工程师<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a>
                 <ul>
-                	<li><a class="open" href="javascript:;">HTML</a></li>
                 	<li>
-                	    <a class="open" href="javascript:;">CSS</a>
+                	    <a class="item close" href="javascript:;">HTML<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a>
                 	    <ul>
-                	    	<li><a href="javascript:;">SASS</a></li>
-                	    	<li><a href="javascript:;">LESS</a></li>
-                	    	<li><a href="javascript:;">POSTCSS</a></li>
+                	    	<li><a class="item" href="javascript:;">HTML5<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a></li>
+                	    	<li><a class="item" href="javascript:;">xHtml<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a></li>
                 	    </ul>
                 	</li>
-                	<li><a class="close" href="javascript:;">JAVASCRIPT</a></li>
+                	<li>
+                	    <a class="item open" href="javascript:;">CSS<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a>
+                	    <ul>
+                	    	<li><a class="item" href="javascript:;">SASS<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a></li>
+                	    	<li><a class="item" href="javascript:;">LESS<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a></li>
+                	    	<li><a class="item" href="javascript:;">POSTCSS<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a></li>
+                	    </ul>
+                	</li>
+                	<li>
+                	    <a class="item open" href="javascript:;">JAVASCRIPT<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a>
+                	    <ul>
+                	    	<li><a class="item" href="javascript:;">Typescript<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a></li>
+                	    	<li><a class="item" href="javascript:;">Coffeecript<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a></li>
+                	    </ul>
+                	</li>
                 </ul>
 			</li>
 			<li>
-				<a class="open" href="javascript:;">后端工程师</a>
+				<a class="item open" href="javascript:;">后端工程师<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a>
 				<ul>
 					<li>
-					    <a class="open" href="javascript:;">PHP</a>
+					    <a class="item open" href="javascript:;">PHP<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a>
                         <ul>
-                        	<li><a href="javascript:;">Thinkphp</a></li>
-                        	<li><a href="javascript:;">Yii</a></li>
+                        	<li><a class="item" href="javascript:;">Thinkphp<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a></li>
+                        	<li><a class="item" href="javascript:;">Yii<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a></li>
                         </ul>
 					</li>
 					<li>
-					    <a class="open" href="javascript:;">JSP</a>
+					    <a class="item close" href="javascript:;">JSP<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a>
 					    <ul>
-					    	<li><a href="javascript:;">Spring</a></li>
-					    	<li><a href="javascript:;">Hibernate</a></li>
+					    	<li><a class="item" href="javascript:;">Spring<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a></li>
+					    	<li><a class="item" href="javascript:;">Hibernate<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a></li>
 					    </ul>
 					</li>
-					<li><a href="javascript:;">PYTHON</a></li>
+					<li><a class="item" href="javascript:;">PYTHON<i id="addItem" class="add-item" href="javascript:;">添加</i><i id="deleteItem" class="delete-item" href="javascript:;">删除</i></a></li>
 				</ul>
 			</li>
-		</ul>
+		</ul> -->
+		
 	</div>
-<!-- 	<script src="script.js"></script>
-	<script>
-		var root = Tree.insertTo('#container');
-	</script> -->
+    <script>
+    	(function() {
+    		var wrap = document.querySelector('.container');
+    		var num = 1;
+    		var searchArea = document.querySelector('#searchArea');
+    		var searchBtn = document.querySelector('#searchBtn');
+            
+    		wrap.addEventListener('click', function(e) {
+                var value,
+                    itemId,
+                    target = e.target;
+                // 绑定添加按钮
+                if (target.className === 'add-item') {
+                	var result = window.prompt('请输入需要添加的内容').trim();
+                    target.parentNode.parentNode.addItemElement(result);
+                    // 创建的新条目默认是打开的
+                    target.parentNode.classList.remove('close');
+                    target.parentNode.classList.add('open');
+                }
+                // 绑定删除
+                if (target.className === 'delete-item') {
+                	if (window.confirm('确认删除?')) {
+                		target.deleteItemElement();
+                	}
+                }
+                // 绑定点击展开和收起
+                if (target.classList.contains('item')) {
+                	if (target.classList.contains('close')) {
+                        target.classList.remove('close');
+                        target.classList.add('open');
+                	} else if (target.classList.contains('open')) {
+                		target.classList.remove('open');
+                        target.classList.add('close');
+                	}
+                }
+    		});
+            // 搜索
+    		searchBtn.addEventListener('click', function(e) {
+    			var value = searchArea.value.trim();
+    			var spans = wrap.querySelectorAll('.item-value');
+    			var flag = false;
+    			if (value) {
+    				for (span of spans) {
+	                	span.classList.remove('result');
+	                }
+	                
+	                for (span of spans) {
+	                	if (span.textContent === value) {
+	                		span.classList.add('result');
+	                		spread(span.parentNode.parentNode); // span->a->li
+	                		flag = true;
+	                	} 
+	                }
+	                if (flag === false) {
+	                	alert('没有结果!');
+	                	searchArea.value = '';
+	                }
+    			}
+    			
+    		});
+
+    		function spread(node) { // 展开找到的节点
+    			var superLi = node.parentNode.parentNode; // li->ul->li
+    			if (superLi) {
+    				if (superLi.tagName === 'LI' && superLi.firstElementChild.classList.contains('close')) {
+	                	spread(superLi);
+	                    superLi.firstElementChild.classList.remove('close');
+	                    superLi.firstElementChild.classList.add('open');
+	                }
+    			}
+                
+    		}
+
+            Element.prototype.addItemElement = function(value) {
+            	var containerList = this.lastElementChild;
+            	var addNode = document.createElement('li');
+                addNode.setAttribute('id', 'list-item-' + num++);
+
+            	// 如果容器的最后一个子元素不是ul(没有子列表)
+            	if (!containerList || containerList.tagName !== 'UL') { 
+                    containerList = document.createElement('ul');
+                    this.appendChild(containerList);
+            	} 
+            	addNode.innerHTML = `<a class="item" href="javascript:;"><span class="item-value">${value}</span><i class="add-item" href="javascript:;">添加</i><i class="delete-item" href="javascript:;">删除</i></a>`;
+    	        containerList.appendChild(addNode);
+    	        // 添加close类
+    	        if (this.tagName === 'LI') {
+    	        	this.firstElementChild.classList.add('close');
+    	        }
+                
+                return this;
+            };
+
+            Element.prototype.deleteItemElement = function() {
+                var rootNode = this.parentNode.parentNode.parentNode;
+        		rootNode.removeChild(this.parentNode.parentNode);
+        		// 如果ul变成空的, 则把ul也删除掉
+        		if (rootNode.tagName === 'UL' && rootNode.children.length === 0) {
+        			console.log(rootNode.parentNode)
+                    rootNode.parentNode.firstElementChild.classList.remove('open');
+        			rootNode.parentNode.removeChild(rootNode);
+                }
+            };
+
+
+    	})();
+    	
+    </script>
+    <script>
+    	var container = document.querySelector('.container');
+    	container.addItemElement('电影');
+    	container.addItemElement('电视剧');
+ 
+    	container.addItemElement('戏剧');
+        
+    	var childNodeList1 = container.querySelector('ul').querySelectorAll('li');
+    	for (var item of childNodeList1) {
+    		item.addItemElement('3D电影');
+    		item.addItemElement('子项目2');
+    		item.addItemElement('子项目3');
+    	}
+    	document.querySelector('#list-item-4').addItemElement('IMAX 3D电影')
+    	                                 .addItemElement('VR电影')
+    </script>
 </body>
 </html>

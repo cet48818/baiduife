@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font: 14px 'Microsoft YaHei', sans-serif;
+		}
+        .input-group {
+        	box-sizing: border-box;
+        	margin: 14px 0 14px 0;
+        	width: 360px;
+            overflow: hidden;
+        }
+        p {
+        	margin: 0;
+        	padding: 0;
+        }
+        label {
+        	font-size: 16px;
+        }
+        button {
+        	box-sizing: border-box;
+        	width: 50px;
+            height: 26px;
+            padding: 3px;
+            border: none;
+            border-radius: 3px;
+            background: #06f;
+            color: #fff;
+        }
+        input {
+        	box-sizing: border-box;
+        	height: 26px;
+        	padding: 2px 3px;
+        	border: 1px solid #ccc;
+        	border-radius: 3px;
+        	outline: none;
+        }
+        .form-title {
+        	display: inline-block;
+        	width: 110px;
+            text-align: right;
+        }
+        .form-content {
+        	float: right;
+        }
+        .prompt {
+        	font-size: 12px;
+        	color: #aaa;
+        }
+	</style>
+</head>
+<body>
+	<div class="input-group">
+		<label class="form-title" for="username">名称</label>
+		<div class="form-content">
+			<input type="text" id="username" name="username">
+			<button class="submit">验证</button>
+			<p class="prompt">
+				必填, 长度为4-16个字符
+			</p>
+		</div>
+
+		
+	</div>
+</body>
+</html>

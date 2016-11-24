@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.planet {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+		/* 	margin-left: -50px;
+			margin-top: -50px; */
+			transform: translate(-50%, -50%);
+			width: 100px;
+			height: 100px;
+			background: cyan;
+			border-radius: 50%;
+		}
+		.track {
+			box-sizing: border-box;
+			position: absolute;
+            left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			width: 300px;
+			height: 300px;
+			border-radius: 50%;
+			border: 1px solid #ccc;
+		}
+		.spaceship {
+			box-sizing: border-box;
+			position: absolute;
+			left: 130px;
+            top: -8px;
+			width: 40px;
+			height: 15px;
+			border: 1px solid red;
+			border-radius:  0 10px 10px 0;
+		}
+		.rotate {
+
+		}
+		
+		@keyframes circle {
+		    from { transform:rotate(0deg); }
+		    to { transform:rotate(360deg); }
+		}
+	</style>
+</head>
+<body>
+
+            	<div class="track">
+	    			<div class="planet"></div>
+	    			<div class="spaceship"></div>
+	    		</div>
+    		    <button class="btn">点我</button>
+    
+	<script>
+        var track = document.querySelector('.track');
+        var spaceship = document.querySelector('.spaceship');
+
+        var btn = document.querySelector('.btn');
+        var timer;
+        var rad = 0;
+        var t;
+
+        // btn.addEventListener('click', function() {
+        // 	var t = Date.now();
+        // 	if (!timer) {
+        // 		timer = setInterval(function() {
+        // 		spaceship.style.left = 130 + Math.sin(Math.PI/180 * rad) * 150 + 'px'; 
+	       //      spaceship.style.top = 150 - 8 - Math.cos(Math.PI/180 * rad) * 150 + 'px';
+	       //      rad += .23;
+	       //      if (rad >= 360) {
+	       //      	console.log(Date.now() - t);
+	       //      	rad = 0;
+	       //      }
+        // 	}, 20);
+        // 	} else {
+        // 		clearInterval(timer);
+        // 		timer = null;
+        // 	}
+        // });
+
+        // var timeCount = .02 * 360; // 7.2s
+        // var perimeter = 300 * Math.PI;
+        // var speed = perimeter / timeCount;
+        // var timeCount2 = perimeter/30;
+        // console.log(speed);
+        // console.log(perimeter / 30) // 31.41592653589793 // 耗时
+        // var rad2 = timeCount2 /.02;
+        // console.log(360/rad2)
+
+        btn.addEventListener('click', function() {
+        	t = Date.now();
+        	if (!timer) {
+        		moving();
+        	} else {
+        		// clearTimeout(timer);
+        		cancelAnimationFrame(timer);
+        		timer = null;
+        	}
+        });
+
+        function moving() {
+        	spaceship.style.left = 130 + Math.sin(Math.PI/180 * rad) * 150 + 'px'; 
+            spaceship.style.top = 150 - 8 - Math.cos(Math.PI/180 * rad) * 150 + 'px';
+	        rad += 1;
+        	// timer = setTimeout(function() {
+        	// 	moving();
+        	// }, 16)
+        	if (rad >= 360) {
+        		rad = 0;
+        		console.log(Date.now() - t)
+        	}
+        	timer = requestAnimationFrame(moving);
+        }
+
+	</script>
+</body>
+</html>

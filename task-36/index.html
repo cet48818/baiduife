@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <p class="introduction">
+			    GO：向蓝色边所面向的方向前进一格（一格等同于正方形的边长）<br>
+				TUN LEF：向左转（逆时针旋转90度）<br>
+                TUN RIG：向右转（顺时针旋转90度）<br>
+                TUN BAC：向右转（旋转180度）<br>
+                TRA LEF：向屏幕的左侧移动一格，方向不变<br>
+			    TRA TOP：向屏幕的上面移动一格，方向不变<br>
+			    TRA RIG：向屏幕的右侧移动一格，方向不变<br>
+			    TRA BOT：向屏幕的下面移动一格，方向不变<br>
+			    MOV LEF：方向转向屏幕左侧，并向屏幕的左侧移动一格<br>
+			    MOV TOP：方向转向屏幕上面，向屏幕的上面移动一格<br>
+			    MOV RIG：方向转向屏幕右侧，向屏幕的右侧移动一格<br>
+			    MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格<br>
+			    点击执行时，依次逐条执行所有命令<br>
+                对于GO，TRA以及MOV指令增加可以移动格子数量的参数，例如<br>
+                GO 3：向当前方向前进三格<br>
+			    TRA TOP 2：向屏幕上方平移两格<br>
+			    MOV RIG 4：方向转向屏幕右侧，向屏幕的右侧移动四格<br>
+			    新增修墙的指令，BUILD<br>
+                新增粉刷的指令，BRU color，color是一个字符串，保持和css中颜色编码一致<br>
+                新增一个按钮，可以在空间内随机生成一些墙<br>
+                增加一个指令：MOV TO x, y，会使得方块从当前位置移动到坐标为x，y的地方，移动过程中不能进入墙所在的地方<br>
+
+
+    </p>
+	<div class="wrapper">
+		<div class="main">
+		<div class="hori-num"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+		<div class="verti-num"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+		<div class="grids">
+		<!-- 	<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div> -->
+		</div>
+		    <div class="square">
+		    	<div class="square-front"></div>
+		    </div>
+			<div class="order">
+                <div class="btn-area">
+                	<button class="submitBtn" type="submit">执行</button>
+				    <button class="refresh">清空</button>
+				   <!--  <input type="text" class="wall-num" placeholder="输入墙的数目"> -->
+				    <button class="make-wall">随机造墙</button>
+                </div>
+				
+				<div class="line-area">
+				<!-- 	<span class="error">1</span>
+					<span>2</span>
+					<span>3</span>
+					<span class="error">4</span>
+					<span class="error">5</span>
+					<span>6</span>
+					<span>7</span>
+		            <span>8</span> -->
+				</div>
+				<textarea name="inputArea" class="input-area"></textarea> 
+			</div>
+		</div>
+		
+		
+
+	</div>
+    <script src="script.js"></script>
+</body>
+</html>

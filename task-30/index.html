@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font: 14px 'Microsoft YaHei', sans-serif;
+		}
+        .input-group {
+        	box-sizing: border-box;
+        	margin: 14px 0 14px 0;
+        /* 	width: 360px; */
+            overflow: hidden;
+        }
+        p {
+        	margin: 0;
+        	padding: 0;
+        }
+        label {
+        	font-size: 16px;
+        }
+        button {
+        	box-sizing: border-box;
+        	width: 60px;
+            height: 32px;
+            padding: 3px;
+            border: none;
+            border-radius: 3px;
+            background: #06f;
+            color: #fff;
+            font-size: 14px;
+        }
+        input {
+        	box-sizing: border-box;
+            width: 200px;
+        	height: 26px;
+        	padding: 2px 3px;
+        	border: 1px solid #ccc;
+        	border-radius: 3px;
+        	outline: none;
+        }
+        .form-area {
+            width: 360px;
+        }
+        .form-title {
+        	float: left;
+            width: 140px;
+            text-align: right;
+            letter-spacing: 0.5em;
+        }
+        .form-content {
+      /*   	float: right; */
+      margin-left: 160px;
+        }
+        .prompt {
+        	font-size: 12px;
+        	color: #aaa;
+        }
+        .warning-msg {
+            color: #f00;
+        }
+        .success-msg {
+            color: #5c2;
+        }
+        input.warning-msg {
+            border: 1px solid #f00;
+        }
+        input.success-msg {
+            border: 1px solid #5c2;
+        }
+        .submitBtn {
+            float: right;
+        }
+	</style>
+</head>
+<body>
+    <div class="form-area">
+        <form action="#" method="post" id="form1">
+            <div class="input-group">
+            <label class="form-title" for="username">名称</label>
+            <div class="form-content">
+                <input type="text" id="username" class="username" name="username">
+                <p class="prompt">
+                    必填, 长度为4-16个字符
+                </p>
+            </div>
+        </div>
+        <div class="input-group">
+            <label class="form-title" for="password">密码</label>
+            <div class="form-content">
+                <input type="password" id="password" class="password" name="password">
+                <p class="prompt">
+                    必填, 6-14位英文或数字
+                </p>
+            </div>
+        </div>
+        <div class="input-group">
+            <label class="form-title" for="password-confirm">密码确认</label>
+            <div class="form-content">
+                <input type="password" id="password-confirm" class="password-confirm" name="password-confirm">
+                <p class="prompt">
+                    必填, 6-14位英文或数字
+                </p>
+            </div>
+        </div>
+        <div class="input-group">
+            <label class="form-title" for="email">邮箱</label>
+            <div class="form-content">
+                <input type="text" id="email" class="email" name="email">
+                <p class="prompt">
+                    必填, 请输入邮箱地址
+                </p>
+            </div>
+        </div>
+        <div class="input-group">
+            <label class="form-title" for="phone-number">手机</label>
+            <div class="form-content">
+                <input type="text" id="phone-number" class="phone-number" name="phone-number">
+                <p class="prompt">
+                    必填, 请输入手机号码
+                </p>
+            </div>
+        </div>
+        <button class="submitBtn" type="submit">提交</button>
+        </form>
+    </div>
+	
+    <script>
+        var usernameArea = document.querySelector('.username');
+        var passwordArea = document.querySelector('.password');
+        var pwConformArea = document.querySelector('.password-confirm');
+        var emailArea = document.querySelector('.email');
+        var phoneNumberArea = document.querySelector('.phone-number');
+        var subBtn = document.querySelector('.submitBtn');
+        var prompts = document.querySelectorAll('.prompt');
+
+        usernameArea.addEventListener('blur', function(e) {
+            var reg = /^[a-z\d\u4e00-\u9fa5]{4,16}$/i;
+            var value = this.value.trim();
+            var flag = validation.call(this, reg, value);
+            checkValidate.call(this, flag, '名称可用', '名称不合法');
+        });
+        passwordArea.addEventListener('blur', function(e) {
+            var reg = /^[a-z\d]{6,14}$/;
+            var value = this.value.trim();
+            var flag = validation.call(this, reg, value);
+            var confirmPass = pwConformArea.value.trim();
+            checkValidate.call(this, flag, '密码可用', '密码不合法');
+            if (confirmPass) { // 密码修改时对密码是否一致进行确认
+                flag = confirmPassword(value, confirmPass);
+                checkValidate.call(pwConformArea, flag, '密码一致', '密码不一致');
+            };
+
+        });
+        pwConformArea.addEventListener('blur', function(e) {
+            var confirmPass = this.value.trim();
+            var pass = passwordArea.value.trim();
+            var flag;
+            // if (pass) {
+            flag = confirmPassword(pass, confirmPass);
+            checkValidate.call(this, flag, '密码一致', '密码不一致');
+            // }
+        });
+        emailArea.addEventListener('blur', function(e) {
+            var reg = /^.+@.+$/;
+            var value = this.value.trim();
+            var flag = validation.call(this, reg, value);
+            checkValidate.call(this, flag, '邮箱可用', '邮箱不合法');
+        });
+        phoneNumberArea.addEventListener('blur', function(e) {
+            var reg = /^1\d{10}$/;
+            var value = this.value.trim();
+            var flag = validation.call(this, reg, value);
+            checkValidate.call(this, flag, '手机号码可用', '手机号码不合法');
+        });
+
+        subBtn.addEventListener('click', function(e) {
+            // prompts = document.querySelectorAll('.prompt');
+            for (prompt of prompts) {
+                if (!prompt.classList.contains('success-msg')) {
+                    alert('请完成验证!');
+                    e.preventDefault();
+                    break;
+                }
+            }
+            
+        });
+
+        function validation(reg, str) {
+            if (str !== '') {
+                if (reg.test(str)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return null;
+            }
+        }
+
+        function checkValidate(flag, successMsg, errorMsg) {
+            var prompt = this.nextElementSibling;
+            if (!this.initPrompt) {
+                this.initPrompt = prompt.textContent;
+            }
+            this.classList.remove('success-msg');
+            this.classList.remove('warning-msg');
+            prompt.classList.remove('success-msg');
+            prompt.classList.remove('warning-msg');
+            prompt.textContent = this.initPrompt;
+            // 如果输入被清空, flag为null, 以下代码都都不会执行, 只会恢复默认样式
+            if (flag === true) {
+                this.classList.add('success-msg');
+                prompt.classList.add('success-msg');
+                prompt.textContent = successMsg;
+            } else if (flag === false) {
+                this.classList.add('warning-msg');
+                prompt.classList.add('warning-msg');
+                prompt.textContent = errorMsg;
+            }
+        }
+
+        function confirmPassword(pass, confirmPass) {
+            if (confirmPass !== '') {
+                if (pass === confirmPass) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return null;
+            }
+            
+        }
+    </script>
+</body>
+</html>
