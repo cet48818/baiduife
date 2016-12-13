@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.unit-area {
+            display: none;
+        }
+	</style>
+</head>
+<body>
+    <div class="input-group">
+        <input type="radio" name="status" id="student" value="0" checked>
+        <label for="student">在校生</label>
+        <input type="radio" name="status" id="non-student" value="1">
+        <label for="non-student">非在校生</label>
+    </div>
+    <div class="school-area">
+        <label>学校</label>
+        <select class="city" name="city">
+            <!-- <option value="0">北京</option>
+            <option value="1">上海</option> -->
+        </select>
+        <select class="university" name="university">
+<!--             <option value="0">北京大学</option>
+            <option value="1">清华大学</option> -->
+        </select>
+    </div>
+    <div class="unit-area">
+        <label for="group">就业单位</label>
+        <input type="text" id="group" name="group">
+    </div>
+    <script>
+        var data = [
+            {
+                city: "北京",
+                university: ["北京大学", "清华大学", "中国科技大学"]
+            },
+            {
+                city: "上海",
+                university: ["复旦大学", "交通大学", "同济大学"]
+            },
+            {
+                city: "江苏",
+                university: ["苏州大学", "江苏大学", "南京大学"]
+            }
+        ];
+
+        var statusInput = document.getElementsByName('status');
+        var schoolArea = document.querySelector('.school-area');
+        var unitArea = document.querySelector('.unit-area');
+        var citySelect = document.querySelector('.city');
+        var universitySelect = document.querySelector('.university');
+        var cityStr = '';
+        var initStr = '';
+        data.forEach(function(item, index) {
+            // 城市选择
+            cityStr += `<option value=${index}>${item.city}</option>`;
+        });
+        citySelect.innerHTML = cityStr;
+        
+        data[0].university.forEach(function(item, index) {
+            // 初始化学校选择
+            initStr += `<option value=${index}>${item}</option>`;
+        });
+        universitySelect.innerHTML = initStr;
+        
+        for (let radio of statusInput) { // 在校生和非在校生对应选项
+            radio.addEventListener('change', function(e) {
+                if (this.value === '0' && this.checked === true) {
+                    schoolArea.style.display = 'block';
+                    unitArea.style.display = 'none';
+                } else if (this.value === '1' && this.checked === true) {
+                    schoolArea.style.display = 'none';
+                    unitArea.style.display = 'block';
+                }
+            });
+        }
+        
+        citySelect.addEventListener('change', function() {
+            var str = '';
+            data[this.value].university.forEach(function(item, index) {
+                 str += `<option value=${index}>${item}</option>`;
+            });
+            universitySelect.innerHTML = str;
+        });
+        
+    </script>
+</body>
+</html>

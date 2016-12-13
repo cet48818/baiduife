@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    
+	<p>Live Example</p>
+	<button onclick="delayedAlert();">Show an alert box after two seconds</button>
+	<p></p>
+	<button onclick="clearAlert();">Cancel alert before it happens</button>
+	<script>
+		// var timeoutID;
+
+		// function delayedAlert() {
+		//   timeoutID = window.setTimeout(slowAlert, 2000);
+		// }
+
+		// function slowAlert() {
+		//   alert("That was really slow!");
+		// }
+
+		// function clearAlert() {
+		//   window.clearTimeout(timeoutID);
+		// }
+
+		var tid;
+		tid = setTimeout(function() {
+			console.log(1);
+		}, 1000);
+		tid2 = setTimeout(function() {
+			console.log(2);
+		}, 500)
+		clearTimeout(tid)
+	</script>
+</body>
+</html>

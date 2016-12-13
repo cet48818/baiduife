@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        
+        .inner {
+            display: inline-block;
+            color: #fff;
+            background: #f00;
+            padding: 5px;
+            margin-top: 10px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .leftOut {
+            margin-left: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <input type="text" id="num-input">
+        <button id="leftIn">左侧入</button>
+        <button id="rightIn">右侧入</button>
+        <button id="leftOut" class="leftOut">左侧出</button>
+        <button id="rightOut">右侧出</button>
+    </div>
+    <div id="queue">
+        <!--<div class="inner">11</div>
+        <div class="inner">12</div>-->
+    </div>
+    <script>
+        function Queue(id) {
+            this.items = [];
+            this.wrapper = document.querySelector('#' + id);
+            this.leftIn = document.querySelector('#leftIn');
+            this.rightIn = document.querySelector('#rightIn');
+            this.leftOut = document.querySelector('#leftOut');
+            this.rightOut = document.querySelector('#rightOut');
+            this.input = document.querySelector('#num-input');
+            this.inputVal;
+            this.innerItem;
+            this.init();
+        }
+        Queue.prototype.init = function() {
+            var me = this;
+            // 绑定左插入
+            this.leftIn.addEventListener('click', function(e) { 
+                if (me.checkVal()) {
+                    me.items.unshift(me.inputVal);
+                    me.renderQueue();
+                }
+                
+            });
+            // 绑定右插入
+            this.rightIn.addEventListener('click', function(e) {
+                if (me.checkVal()) {
+                    me.items.push(me.inputVal);
+                    me.renderQueue();
+                }
+                
+            });
+            // 绑定左删除
+            this.leftOut.addEventListener('click', function(e) {
+                console.log(me.items)
+                me.items.shift();
+                me.renderQueue();
+            });
+            // 绑定右删除
+            this.rightOut.addEventListener('click', function(e) {
+                me.items.pop();
+                me.renderQueue();
+            });
+            // 点击单个数据删除
+            this.wrapper.addEventListener('click', function(e) {
+                if (e.target.className === 'inner') {
+                    var index = +e.target.dataset.index;
+                    me.items.splice(index, 1);
+                    me.renderQueue();
+                }
+            });
+        };
+        
+        // 检查输入是否合法
+        Queue.prototype.checkVal = function() {
+            this.inputVal = this.input.value.trim();
+            var reg = /^\d+$/;
+            if (!reg.test(this.inputVal)) {
+                alert('必须输入数字');
+            } else {
+                return true;
+            }
+        };
+
+        // 渲染
+        Queue.prototype.renderQueue = function() {
+            var innerStr = '';
+            this.items.forEach(function(item, index) {
+                innerStr += `<div class="inner" data-index="${index}">${item}</div>`;
+            });
+            this.wrapper.innerHTML = innerStr;
+            this.input.value = '';
+        }
+
+        var queue = new Queue('queue');
+    </script>
+</body>
+</html>

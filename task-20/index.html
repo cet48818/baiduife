@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        
+        .inner {
+            display: inline-block;
+            color: #fff;
+            background: #f00;
+            padding: 5px;
+            margin-top: 10px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .leftOut {
+            margin-left: 2em;
+        }
+        textarea {
+            resize: none;
+        }
+        .search-out {
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <!--<input type="text" id="num-input">-->
+        <textarea name="input-area" id="input-area" cols="30" rows="10" placeholder="可输入中英文或者数字, 非法字符会被过滤掉; 多个字符之间可以用空格或逗号隔开"></textarea>
+        <button id="leftIn">左侧入</button>
+        <button id="rightIn">右侧入</button>
+        <button id="leftOut" class="leftOut">左侧出</button>
+        <button id="rightOut">右侧出</button>
+        <input type="text" id="search-area" placeholder="请输入查询词">
+        <button id="searchBtn">查询</button>
+    </div>
+    <div id="queue">
+        <!--<div class="inner">11</div>
+        <div class="inner">12</div>-->
+    </div>
+    <script>
+        function Queue(id) {
+            this.items = [];
+            this.insertItems = [];
+            this.wrapper = document.querySelector('#' + id);
+            this.leftIn = document.querySelector('#leftIn');
+            this.rightIn = document.querySelector('#rightIn');
+            this.leftOut = document.querySelector('#leftOut');
+            this.rightOut = document.querySelector('#rightOut');
+            this.input = document.querySelector('#input-area');
+            this.searchArea = document.querySelector('#search-area');
+            this.searchBtn = document.querySelector('#searchBtn');
+            this.inputVal;
+            this.inners = [];
+            this.inputArr;
+            this.init();
+        }
+        Queue.prototype.init = function() {
+            var items = this.items;
+            var me = this;
+            // 绑定左插入
+            this.leftIn.addEventListener('click', function(e) { 
+                me.checkVal();
+                if(me.insertItems.length > 0) {
+                    me.insertItems.forEach(function(item, index) {
+                    items.unshift(item);
+                    });
+                }
+                me.renderQueue();
+            });
+            // 绑定右插入
+            this.rightIn.addEventListener('click', function(e) {
+                me.checkVal();
+                if(me.insertItems.length > 0) {
+                    me.insertItems.forEach(function(item, index) {
+                    items.push(item);
+                    });
+                }
+                me.renderQueue();
+                // if (me.checkVal()) {
+                //     me.items.push(me.inputVal);
+                //     me.renderQueue();
+                // }
+                
+            });
+            // 绑定左删除
+            this.leftOut.addEventListener('click', function(e) {
+                me.items.shift();
+                me.renderQueue();
+            });
+            // 绑定右删除
+            this.rightOut.addEventListener('click', function(e) {
+                me.items.pop();
+                me.renderQueue();
+            });
+            // 点击单个数据删除
+            this.wrapper.addEventListener('click', function(e) {
+                if (e.target.className === 'inner') {
+                    var index = +e.target.dataset.index;
+                    me.items.splice(index, 1);
+                    me.renderQueue();
+                }
+            });
+            // 绑定查询
+            this.searchBtn.addEventListener('click', function(e) {
+                me.clear();
+                var value = me.searchArea.value.trim();
+                me.searchItem(value);
+                me.searchArea.removeAttribute('value');
+                me.searchArea.value = '';
+            });
+        };
+        
+        // 检查输入是否合法, 取得输入的内容;
+        Queue.prototype.checkVal = function() {
+            var me = this;
+            this.inputVal = this.input.value.trim();
+            var reg = /[\u4e00-\u9fa5a-zA-Z\d]+/g;
+            me.insertItems = [];
+            this.inputVal.replace(reg, function() {
+                // 向数组中插入数据
+                me.insertItems.push(arguments[0]);
+            });
+        };
+
+        // 渲染
+        Queue.prototype.renderQueue = function() {
+            var innerStr = '';
+            this.items.forEach(function(item, index) {
+                innerStr += `<div class="inner" data-index="${index}">${item}</div>`;
+            });
+            this.wrapper.innerHTML = innerStr;
+            this.input.value = '';
+        }
+        // 查询
+        Queue.prototype.searchItem = function(value) {
+            
+            this.inners = document.querySelectorAll('.inner');
+            for (var item of this.inners) {
+                if (item.textContent.indexOf(value) ==! -1) {
+                    item.classList.add('search-out');
+                }
+            }
+        }
+        // 清除查询内容
+        Queue.prototype.clear = function() {
+            if (this.inners.length > 0) {
+                 for (var item of this.inners) {
+                if (item.classList.contains('search-out')) {
+                    item.classList.remove('search-out');
+                }
+            }
+         }
+       
+        };
+
+        var queue = new Queue('queue');
+    </script>
+</body>
+</html>

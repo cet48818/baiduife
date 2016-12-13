@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font: 14px 'Microsoft YaHei', sans-serif;
+		}
+        .input-group {
+        	box-sizing: border-box;
+        	margin: 14px 0 14px 0;
+        	width: 360px;
+            overflow: hidden;
+        }
+        p {
+        	margin: 0;
+        	padding: 0;
+        }
+        label {
+        	font-size: 16px;
+        }
+        button {
+        	box-sizing: border-box;
+        	width: 50px;
+            height: 26px;
+            padding: 3px;
+            border: none;
+            border-radius: 3px;
+            background: #06f;
+            color: #fff;
+        }
+        input {
+        	box-sizing: border-box;
+        	height: 26px;
+        	padding: 2px 3px;
+        	border: 1px solid #ccc;
+        	border-radius: 3px;
+        	outline: none;
+        }
+        .form-title {
+        	float: left;
+            width: 120px;
+            text-align: right;
+        }
+        .form-content {
+      /*   	float: right; */
+      margin-left: 128px;
+        }
+        .prompt {
+        	font-size: 12px;
+        	color: #aaa;
+        }
+        .warning-msg {
+            color: #f00;
+        }
+        .success-msg {
+            color: #5c2;
+        }
+	</style>
+</head>
+<body>
+	<div class="input-group">
+		<label class="form-title" for="username">名称</label>
+		<div class="form-content">
+			<input type="text" id="username" name="username">
+			<button class="submit-btn">验证</button>
+			<p class="prompt">
+				必填, 长度为4-16个字符
+			</p>
+		</div>
+    </div>
+    <script>
+        var subBtn = document.querySelector('.submit-btn');
+        var subArea = document.querySelector('#username');
+        var prompt = document.querySelector('.prompt');
+        var initStr = '必填, 长度为4-16个字符';
+        subBtn.addEventListener('click', function(e) {
+            prompt.classList.remove('success-msg');
+            prompt.classList.remove('warning-msg');
+            var str = subArea.value;
+            console.log(str)
+            var verify = verifyInputLength(str, 4, 16);
+            if (verify === 1) {
+                prompt.classList.add('warning-msg');
+                prompt.textContent = '姓名不能为空!';
+            } else if (verify === 2) {
+                prompt.classList.add('warning-msg');
+                prompt.textContent = '姓名太短!';
+            } else if (verify === 3) {
+                prompt.classList.add('warning-msg');
+                prompt.textContent = '姓名太长!';
+            }
+            else {
+                prompt.classList.add('success-msg');
+                prompt.textContent = '名称格式正确';
+            }
+        });
+
+        function verifyInputLength(str, minLength, maxLength) {
+            str = str.trim();
+            if (str === '') {
+                return 1;
+            } else {
+                var inputLength = 0;
+                // 每个字符的charCode必须在ASCII的范围内
+                for (var i=0; i<str.length; i++) {
+                    if (str.charCodeAt(i) < 128) {
+                        inputLength++;
+                    } else {
+                        inputLength += 2;
+                    }
+                }
+
+                if (inputLength < minLength) {
+                    return 2;
+                } else if (inputLength > maxLength) {
+                    return 3;
+                }
+                return 4;
+            }
+            
+        }
+    </script>
+</body>
+</html>

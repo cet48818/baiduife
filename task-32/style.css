@@ -1,0 +1,79 @@
+body {
+	margin: 0;
+	padding: 0;
+	font: 16px 'Microsoft YaHei', sans-serif;
+}
+.input-group {
+	box-sizing: border-box;
+	margin: 14px 0 14px 0;
+/* 	width: 360px; */
+    overflow: hidden;
+}
+p {
+	margin: 0;
+	padding: 0;
+}
+label {
+	font-size: 16px;
+}
+button {
+	box-sizing: border-box;
+	width: 60px;
+    height: 32px;
+    padding: 3px;
+    border: none;
+    border-radius: 3px;
+    background: #06f;
+    color: #fff;
+    font-size: 14px;
+}
+select {
+    margin-left: 1em;
+}
+input[type=text],
+input[type=password] {
+	box-sizing: border-box;
+    width: 200px;
+	height: 26px;
+	padding: 2px 3px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	outline: none;
+}
+input[type="checkbox"],
+input[type="radio"] {
+    margin: 0 0 0 0.5em;
+    vertical-align: middle;
+}
+.form-area {
+    width: 360px;
+}
+.form-title {
+	float: left;
+    width: 140px;
+    text-align: right;
+    letter-spacing: 0.5em;
+}
+.form-content {
+/*   	float: right; */
+margin-left: 160px;
+}
+.prompt {
+	font-size: 12px;
+	color: #aaa;
+}
+.warning-msg {
+    color: #f00;
+}
+.success-msg {
+    color: #5c2;
+}
+input.warning-msg {
+    border: 1px solid #f00;
+}
+input.success-msg {
+    border: 1px solid #5c2;
+}
+.submitBtn {
+    float: right;
+}

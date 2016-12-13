@@ -1,0 +1,101 @@
+// $fontSize: 12px;
+$defaultColor: #333;
+$defaultLineHeight: 1.2;
+
+html,
+body,
+div,
+main,
+aside,
+article,
+section,
+nav,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+li,
+dd,
+dt,
+fieldset,
+legend,
+input,
+button,
+textarea,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+body,
+button,
+input, 
+select,
+textarea {
+    font-family: 'Microsoft YaHei', arial, helvetica, sans-serif;
+    color: $defaultColor;
+    line-height: $defaultLineHeight;
+    background-color: #fff;
+}
+ul,
+ol {
+    list-style: none;
+}
+// h1 {
+//     font-size: $fontSize + 8;
+// }
+// h2 {
+//     font-size: $fontSize + 4;
+// }
+// h3 {
+//     font-size: $fontSize + 2;
+// }
+// h4,
+// h5,
+// h6 {
+//     font-size: $fontSize;
+// }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+a {
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+}
+small,
+em,
+strong,
+address,
+i,
+b {
+    // font-size: $fontSize;
+    font-style: normal;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+input,
+textarea,
+select,
+button {
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+textarea {
+    resize: none;
+}

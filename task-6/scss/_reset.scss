@@ -1,0 +1,90 @@
+$fontSize: 12px;
+$defaultColor: #333;
+$defaultLineHeight: 1.2;
+
+html,
+body,
+div,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+li,
+dd,
+dt,
+fieldset,
+legend,
+input,
+button,
+textarea,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+body,
+button,
+input, 
+select,
+textarea {
+    font: $fontSize 'Microsoft YaHei', arial, helvetica, sans-serif;
+    color: $defaultColor;
+    line-height: $defaultLineHeight;
+}
+ul,
+ol {
+    list-style: none;
+}
+h1 {
+    font-size: $fontSize + 8;
+}
+h2 {
+    font-size: $fontSize + 4;
+}
+h3 {
+    font-size: $fontSize + 2;
+}
+h4,
+h5,
+h6 {
+    font-size: $fontSize;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+small,
+em,
+strong,
+address {
+    font-size: $fontSize;
+    font-style: normal;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+input,
+textarea,
+select {
+    border: 1px solid #ccc;
+    padding: 3px;
+}
+textarea {
+    resize: none;
+}
+.clearfix:after{
+    content:"";
+    display:block;
+    height:0;
+    visibility:hidden;
+    clear:both;
+}

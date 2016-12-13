@@ -1,0 +1,46 @@
+.sort-table {
+    border-collapse: collapse;
+    font-size: 14px;
+}
+.sort-table th,
+.sort-table td {
+    border: 1px solid #ccc;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+}
+.sort-table th {
+    position: relative;
+    height: 36px;
+    background: #333;
+    color: #fff;
+}
+.sort-table .sort-area {
+    display: inline-block;
+    position: absolute;
+    right: 8px;
+    top: 10px;
+    width: 8px;
+    height: 18px;
+    cursor: pointer;
+}
+.sort-table .sort-area .asc {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 6px solid #fff;
+}
+.sort-table .sort-area .desc {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid #fff;
+}

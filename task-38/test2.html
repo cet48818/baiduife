@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>2</div>
+    <div>1</div>
+    <div>3</div>
+    <div>8</div>
+    <div>6</div>
+    <script>
+        var divs = document.querySelectorAll('div');
+        console.log(divs)
+        var ss = Array.prototype.sort.call(divs, function(a, b) {
+            return a.innerText - b.innerText;
+        });
+        console.log(ss)
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>planet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="message-panel">
+    	<div class="title" draggable="true">信息</div>
+    	<div class="message-area">
+    	<!-- 	<div class="mes">发射成功</div>
+	    	<div class="mes">发射成功</div>
+	    	<div class="mes">发射成功</div>
+	    	<div class="mes">发射成功</div>
+	    	<div class="mes">发射成功</div>
+	    	<div class="mes">发射成功</div>
+	    	<div class="mes">发射成功</div>
+	    	<div class="mes">发射成功</div> -->
+    	</div>
+    </div>
+	<div class="circuit circuit3">
+		<div class="circuit circuit2">
+			<div class="circuit circuit1">
+				<div class="circuit circuit0">
+					<div class="circuit planet"></div>
+				</div>
+			</div>
+		</div>
+	<!-- 	<div class="plane plane1"><span class="energy-percent">100%</span><div class="energy"></div></div>
+		<div class="plane plane2"></div>
+		<div class="plane plane3"></div>
+		<div class="plane plane4"></div> -->
+	</div>
+	<div class="control-panel">
+		<div class="title" draggable="true">操作面板</div>
+		<div class="plane-controls">
+		    	<div class="module-select">
+		    		<div class="engine-type">
+		    			<input id="enterprise" type="radio" name="engine-type" value="0" checked>
+		    			<label for="enterprise">前进号(速率30px/s, 能耗5%/s)</label>
+		    			<input id="gallop" type="radio" name="engine-type" value="1">
+		    			<label for="gallop">奔腾号(速率50px/s, 能耗7%/s)</label>
+		    			<input id="advance" type="radio" name="engine-type" value="2">
+		    			<label for="advance">超越号(速率80px/s, 能耗9%/s)</label>
+		    		</div>
+		    		<div class="power-type">
+		    	                    <input id="standard" type="radio" name="power-type" value="0" checked>
+		    			<label for="standard">劲量型(补充能源速度2%/s)</label>
+		    			<input id="enhance" type="radio" name="power-type" value="1">
+		    			<label for="enhance">光能型(补充能源速度3%/s)</label>
+		    			<input id="max" type="radio" name="power-type" value="2">
+		    			<label for="max">永久型(补充能源速度4%/s)</label>
+		    		</div>
+		    		<button type="submit" id="build-plane" class="build-plane">创建新飞船</button>
+		    		<div class="separte-line"></div>
+		    	</div>
+	    	<div class="plane-control" data-index="0">飞船1号: <button class="takeoff">起飞</button><button class="stop">停止</button><button class="destroy">自爆</button></div>
+			<div class="plane-control" data-index="1">
+			飞船2号: <button class="takeoff">起飞</button><button class="stop">停止</button><button class="destroy">自爆</button>
+		    </div>
+		    <div class="plane-control" data-index="2">飞船3号: <button class="takeoff">起飞</button><button class="stop">停止</button><button class="destroy">自爆</button></div>
+		    <div class="plane-control" data-index="3">
+			飞船4号: <button class="takeoff">起飞</button><button class="stop">停止</button><button class="destroy">自爆</button></div>
+		</div>
+	</div>
+	<script src="command.js"></script>
+	<script src="adaptor.js"></script>
+	<script src="bus.js"></script>
+	<script src="plane.js"></script>
+	<script src="main.js"></script>
+
+</body>
+</html>

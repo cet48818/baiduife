@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.container1 {
+			border: 1px solid red;
+		}
+		.container2 {
+			border: 1px solid blue;
+			margin-top: 12px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container1"></div>
+	<div class="container2"></div>
+	<script src="form-factory.js"></script>
+	<script>
+		var formFactory = new FormFactory('.container1', '#', 'post');
+		formFactory
+			.makeInput({
+				label: '名称',
+				type: 'text',
+				id: 'username',
+				name: 'username',
+				validator: function() {
+	                var reg = /^[a-z\d\u4e00-\u9fa5]{4,16}$/i;
+	                return checkValidate.call(this, reg);
+				},
+				rules: '必填, 长度为4-16个字符',
+				success: '格式正确',
+				fail: '格式不合法'
+			})
+			.makeInput({
+				label: '密码',
+				type: 'password',
+				id: 'password',
+				name: 'password',
+				validator: function() {
+					var reg = /^[a-z\d]{6,14}$/i;
+					return checkValidate.call(this, reg);
+				},
+				rules: '必填, 长度为6-14位英文或数字',
+				success: '格式正确',
+				fail: '格式有误'
+			})
+			.makeInput({
+                label: '确认密码',
+				type: 'password-confirm',
+				id: 'pw-confirm',
+				name: 'pw-confirm',
+				validator: function() {
+					return 'password-confirm';
+				},
+				rules: '必填, 长度为6-14位英文或数字',
+				success: '密码一致',
+				fail: '密码不一致'
+			})
+			.makeInput({
+				label: '邮箱',
+				type: 'text',
+				id: 'email',
+				name: 'email',
+				validator: function() {
+					var reg = /^.+@.+$/;
+					return checkValidate.call(this, reg);
+				},
+				rules: '必填, 填写你的邮箱账户',
+				success: '邮箱验证通过',
+				fail: '邮箱地址不合法'
+			})
+			.makeInput({
+				label: '性别',
+				type: 'radio',
+				id: 'gender',
+				name: 'gender',
+				title: '输入你的性别',
+				values: [['male', '男'], ['female','女'], ['secret', '保密']],
+				defaultValue: 'secret',
+			})
+			.makeInput({
+				label: '爱好',
+				type: 'checkbox',
+				id: 'hobby',
+				name: 'hobby',
+				title: '输入你的爱好(最多3项)',
+				values: [['eat', '吃饭'], ['sleep', '睡觉'], ['play', '打豆豆'], ['sing', '唱歌'], ['dance', '跳舞']], // id+text内容
+				maxSelect: 3,
+			})
+			.makeInput({
+				label: '选择年份',
+				type: 'select',
+				id: 'year',
+				name: 'year',
+				values: [['1990', '1990'], ['1991', '1991'], ['1992', '1992'], ['1993', '1993'], ['1994', '1994'], ['1995', '1995']]
+			},
+            {
+				type: 'select',
+				id: 'month',
+				name: 'month',
+				values: [[0, '一月'], [1, '二月'], [2, '三月'], [3, '四月'], [4, '五月']]
+            })
+			.makeInput({
+				id: 'submitBtn',
+				type: 'submit',
+                text: '提交',
+			});
+
+
+			var formFactory = new FormFactory('.container2', '#', 'post');
+			formFactory
+				.makeInput({
+					label: 'FIRST NAME',
+					type: 'text',
+					id: 'firstname',
+					name: 'firstname',
+					validator: function() {
+		                var reg = /^[a-z\d\u4e00-\u9fa5]{4,16}$/i;
+		                return checkValidate.call(this, reg);
+					},
+					rules: '必填, 长度为4-16个字符',
+					success: '格式正确',
+					fail: '格式不合法'
+				})
+				.makeInput({
+					label: 'LAST NAME',
+					type: 'text',
+					id: 'lastname',
+					name: 'lastname',
+					validator: function() {
+		                var reg = /^[a-z\d\u4e00-\u9fa5]{4,16}$/i;
+		                return checkValidate.call(this, reg);
+					},
+					rules: '必填, 长度为4-16个字符',
+					success: '格式正确',
+					fail: '格式不合法'
+				})
+				.makeInput({
+					// label: '知道我们的途径',
+					type: 'checkbox',
+					id: 'method',
+					name: 'method',
+					title: '告诉我们你知道我们的途径(最多2项)',
+					values: [['0', '电视'], ['1', '微博'], ['2', '网站'], ['3', '报纸'], ['4', '其他']], // id+text内容
+					maxSelect: 2,
+				})
+				.makeInput({
+					id: 'submitButton',
+					type: 'submit',
+	                text: '提交',
+				});
+
+			function checkValidate(reg) {
+				var str = this.value.trim();
+				if (str) {
+					return reg.test(str);
+				} else {
+					return null;
+				}
+			}
+	</script>
+</body>
+</html>

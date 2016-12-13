@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>rotate</title>
+    <style>
+    #box{
+        width: 80px;
+        height: 80px;
+        background-color: limegreen;
+        border-radius: 50%;
+        -moz-border-radius:50%;
+        -webkit-border-radius:50%;
+        padding-top: 1px;
+    }
+
+    #box .circle-dot{
+        position: relative;
+        margin-top: 39px;
+        margin-left: 40px;
+        width: 1px;
+        height: 1px;
+    }
+
+    #box .circle-dot #light{
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background:url(images/light.png) no-repeat;
+        left: -15px;
+        top: 25px;
+    }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="circle-dot">
+            <dev id="light"></dev>
+        </div>
+    </div>
+<script>
+   window.onload=function(){
+        var light = document.getElementById("light");
+        var circle = document.getElementById("box");
+        rotate(light,circle);
+        //js控制光圈划动
+        function rotate(ele,circle){
+            var r = circle.clientWidth/2;
+            var rotate = -91;
+            var timer = setInterval(step,10);
+            function step(){
+                rotate += 3;
+                var a = 2*Math.PI/360*rotate;
+                if(rotate == 44){
+                    clearInterval(timer);
+                }
+                var x = r * Math.cos(a)-15; //光圈宽高为30，减去15是让光圈的中心在圆周上
+                var y = -r * Math.sin(a)-15;
+                ele.style.left=x+"px";
+                ele.style.top=y+"px";
+            }
+        }
+   }
+</script>
+</body>
+</html>

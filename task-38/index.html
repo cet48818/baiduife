@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!--<table class="sort-table">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>
+                        语文
+                        <div class="sort-area"><i class="asc"></i><i class="desc"></i></div>
+                    </th>
+                    <th>数学</th>
+                    <th>英语</th>
+                    <th>总分</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                <tr>
+                    <td>小明</td>
+                    <td>80</td>
+                    <td>90</td>
+                    <td>70</td>
+                    <td>240</td>
+                </tr>
+                <tr>
+                    <td>小红</td>
+                    <td>90</td>
+                    <td>60</td>
+                    <td>90</td>
+                    <td>240</td>
+                </tr>
+                <tr>
+                    <td>小亮</td>
+                    <td>60</td>
+                    <td>100</td>
+                    <td>70</td>
+                    <td>230</td>
+                </tr>
+            </tbody>
+        </table>-->
+    </div>
+    <script src="sort-table.js"></script>
+    <script>
+        var tableHeader = [{name: '姓名', sort: true, method: 'str'},
+                           {name: '语文', sort: true, method: 'num'},
+                           {name: '数学', sort: true, method: 'num'},
+                           {name: '英语', sort: true, method: 'num'},
+                           {name: '总分', sort: true, method: 'num'}];
+        var studentsArr = [{name: '明明', math: 80, chs: 90, eng: 70, total: 240},
+                           {name: '红红', math: 90, chs: 80, eng: 60, total: 230},
+                           {name: '亮亮', math: 60, chs: 70, eng: 50, total: 180},
+                           {name: '方方', math: 100, chs: 20, eng: 90, total: 210}
+                          ];
+        var container = document.querySelector('.container');
+        SortTable.init(container, tableHeader, studentsArr);
+    </script>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.main {
+			position: relative;
+			margin: 200px auto;
+			width: 400px;
+			height: 400px;
+			border: 2px solid #333;
+		}
+		.order {
+			position: absolute;
+			left: 0;
+			bottom: -40px;
+		}
+		.hori-num {
+			position: absolute;
+			left: 5px;
+			top: -35px;
+			font-size: 24px;
+		}
+		.hori-num span {
+			margin-right: 28px;
+		}
+		.verti-num {
+			position: absolute;
+			left: -35px;
+			top: 5px;
+			font-size: 24px;
+		}
+		.verti-num span {
+			display: block;
+			text-align: right;
+			margin-bottom: 13px;
+		}
+		.grids {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 400px;
+			height: 400px;
+		}
+		.grid {
+			float: left;
+			width: 40px;
+			height: 40px;
+			box-sizing: border-box;
+			border: 1px solid #ccc;
+		}
+		.square {
+			position: absolute;
+            left: 0;
+            top: 0;
+			width: 40px;
+			height: 40px;
+			background: red;
+			transition: .5s;
+		}
+		.square-front {
+			width: 40px;
+			height: 10px;
+			background: blue;
+		}
+		.introduction {
+			font-size: 12px;
+			color: #555;
+		}
+	</style>
+</head>
+<body>
+    <p class="introduction">
+			    GO：向蓝色边所面向的方向前进一格（一格等同于正方形的边长）<br>
+				TUN LEF：向左转（逆时针旋转90度）<br>
+                TUN RIG：向右转（顺时针旋转90度）<br>
+                TUN BAC：向右转（旋转180度）<br>
+                TRA LEF：向屏幕的左侧移动一格，方向不变<br>
+			    TRA TOP：向屏幕的上面移动一格，方向不变<br>
+			    TRA RIG：向屏幕的右侧移动一格，方向不变<br>
+			    TRA BOT：向屏幕的下面移动一格，方向不变<br>
+			    MOV LEF：方向转向屏幕左侧，并向屏幕的左侧移动一格<br>
+			    MOV TOP：方向转向屏幕上面，向屏幕的上面移动一格<br>
+			    MOV RIG：方向转向屏幕右侧，向屏幕的右侧移动一格<br>
+			    MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格
+            </p>
+	<div class="wrapper">
+		<div class="main">
+		<div class="hori-num"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+		<div class="verti-num"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+		<div class="grids">
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+			<div class="grid"></div>
+		</div>
+		    <div class="square">
+		    	<div class="square-front"></div>
+		    </div>
+			<div class="order">
+				<form action="#">
+                    <input type="text" class="input-area" name="input-area">
+					<button class="submitBtn" type="submit">输入指令</button>
+				</form>
+			</div>
+		</div>
+		
+		
+
+	</div>
+	<script>
+		var square = document.querySelector('.square');
+		var squareFront = square.querySelector('.square-front');
+		var inputArea = document.querySelector('.input-area');
+		var btn = document.querySelector('.submitBtn');
+		var container = document.querySelector('.main');
+
+		btn.addEventListener('click', function(e) {
+			
+			var value = inputArea.value.trim().toLowerCase();
+			if (value !== '') {
+				this.disabled = true;
+				if (value === 'go') {
+	                if (MovingSquare.go(square, container) === null) {
+	                	this.disabled = false; // 如果遇到边界无法前进, 则立即使按钮变为可用
+	                }
+	            } else if (value.substr(0, 3) === 'tun') {
+					if (MovingSquare.turn(value.substr(4))=== null)  {
+						this.disabled = false;
+					}
+				} else if (value.substr(0, 3) === 'tra') {
+					if (MovingSquare.trace(square, container, value.substr(4)) === null) {
+						this.disabled = false;
+					}
+				} else if (value.substr(0, 3) === 'mov') {
+					if (MovingSquare.move(square, container, value.substr(4)) === null) {
+						this.disabled = false;
+					}
+				} else { // 无效命令
+                    this.disabled = false;
+				}
+			}
+			
+            e.preventDefault(); // 阻止表单提交
+		});
+		square.addEventListener('transitionend', function(e) {
+            btn.disabled = false; // 动画停止后才能按下按钮
+		});
+		
+
+
+		var MovingSquare = (function() {
+			var initDeg = 0;
+            var turn = function(direction) {
+                switch (direction) {
+                	case 'lef':
+                	    function *changeDeg() {
+                            initDeg -= 90;
+                            var deg = yield initDeg;
+                            if (deg === -360) {
+                            	initDeg = 0;
+                            }
+                	    }
+                	    var generator = changeDeg();
+                        var val = generator.next().value;
+                        square.style.setProperty('transform', `rotate(${val}deg)`);
+                        generator.next();
+                	    break;
+                	case 'rig':
+                        var promise = new Promise(function(resolve, reject) {
+                            initDeg += 90;
+                            resolve(initDeg);
+                        });
+                        promise
+                        .then(function(deg) {
+                            square.style.setProperty('transform', `rotate(${deg}deg)`);
+                        })
+                        .then(function(deg) {
+                        	if (deg === 360) {
+                        		initDeg = 0;
+                        	}
+                        })
+                	    break;
+                	case 'bac':
+                	    initDeg += 180;
+                	    if (initDeg === 360) {
+                	    	initDeg = 0;
+                	    }
+                	    square.style.setProperty('transform', `rotate(${initDeg}deg)`);
+                	    break;
+                	default:
+                	    return null;
+                }
+
+            };
+
+            var go = function(square, container) {
+               var direction;
+               if (initDeg === 0) {
+                  direction = 'top';
+               } else if (initDeg === 90 || initDeg === -270) {
+                   direction = 'rig';
+               } else if (initDeg === -90 || initDeg === 270) {
+                   direction = 'lef';
+               } else { // 180 || -180
+                   direction = 'bot';
+               }
+               if (baseMoving(direction) === null) {
+               	   return null;
+               }
+            };
+
+            var trace = function(square, container, direction) {
+                // 移动一格, 方向不变
+                if (baseMoving(direction) === null) {
+                	return null;
+                }
+            };
+
+            var move = function(square, container, direction) {
+                // 转向以后, 移动一格
+                var curDirection;
+                if (initDeg === 0) {
+                    curDirection = 'top';
+                } else if (initDeg === 90 || initDeg === -270) {
+                    curDirection = 'rig';
+                } else if (initDeg === -90 || initDeg === 270) {
+                    curDirection = 'lef';
+                } else { // 180 || -180
+                    curDirection = 'bot';
+                }
+                if (curDirection !== direction) {
+               	    switch (curDirection) {
+               	    	case 'top':
+               	    	    if (direction === 'lef') {
+               	    	    	turn('lef');
+               	    	    } else if (direction === 'rig') {
+               	    	    	turn('rig');
+               	    	    } else if (direction === 'bot') {
+               	    	    	turn('bac');
+               	    	    } else {
+               	    	    	return null;
+               	    	    }
+               	    	    break;
+               	    	case 'rig':
+               	    	    if (direction === 'top') {
+               	    	    	turn('lef');
+               	    	    } else if (direction === 'bot') {
+               	    	    	turn('rig');
+               	    	    } else if (direction === 'lef') {
+               	    	    	turn('bac');
+               	    	    } else {
+               	    	    	return null;
+               	    	    }
+               	    	    break;
+               	    	case 'lef':
+               	    	    if (direction === 'top') {
+               	    	    	turn('rig');
+               	    	    } else if (direction === 'bot') {
+               	    	    	turn('lef');
+               	    	    } else if (direction === 'rig') {
+               	    	    	turn('bac');
+               	    	    } else {
+               	    	    	return null;
+               	    	    }
+               	    	    break;
+               	    	case 'bot':
+               	    	    if (direction === 'lef') {
+               	    	    	turn('lef');
+               	    	    } else if (direction === 'rig') {
+               	    	    	turn('rig');
+               	    	    } else if (direction === 'top') {
+               	    	    	turn('bac');
+               	    	    } else {
+               	    	    	return null;
+               	    	    }
+               	    	    break;
+               	    }
+                }
+                
+               	if (baseMoving(direction) === null) {
+                	return null;
+                }
+            };
+
+            function baseMoving(direction) {
+            	var width = square.offsetWidth;
+            	var offset;
+            	var border = container.clientWidth - width;
+
+            	switch (direction) {
+            		case 'lef':
+                       offset = square.offsetLeft - width;
+	                   if (offset < 0) return null;
+	                   square.style.left = offset + 'px';
+            		   break;
+            		case 'top':
+                        offset = square.offsetTop - width;
+	                    if (offset < 0) return null;
+	                    square.style.top = offset + 'px';
+            		    break;
+                    case 'rig':
+                        offset = square.offsetLeft + width;
+	                    if (offset > border) return null;
+	                    square.style.left = offset + 'px';
+            		    break;
+                    case 'bot':
+                        offset = square.offsetTop + width;
+	                    if (offset > border) return null; 
+	                    square.style.top = offset + 'px';
+            		    break;
+            		default:
+            		    return null;
+            	}
+            }
+
+            return {
+            	turn: turn,
+            	go: go,
+            	trace: trace,
+            	move: move
+            }
+		}());
+	</script>
+</body>
+</html>
