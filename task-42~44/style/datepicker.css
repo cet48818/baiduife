@@ -1,0 +1,117 @@
+.date-picker {
+    position: absolute;
+    font: 14px 'Microsoft Yahei';
+    width: 240px;
+    /*border: 1px solid #ccc;*/
+}
+.date-picker .header {
+    position: relative;
+    height: 32px;
+    line-height: 32px;
+    background: red;
+    color: #fff;
+    text-align: center;
+}
+.date-picker .header .header-data {
+    display: inline-block;
+    width: 80%;
+    height: 24px;
+    line-height: 26px;
+    margin: 5px 5px 0;
+    cursor: pointer;
+}
+.date-picker .header .header-data:hover {
+    background: rgba(255, 255, 255, .5);
+    border-radius: 2px;
+}
+.date-picker .pre-btn,
+.date-picker .next-btn {
+    display: inline-block;
+    cursor: pointer;
+}
+.date-picker .pre-btn {
+    width: 0;
+    width: 0;
+    border-bottom: 6px solid transparent;
+    border-top: 6px solid transparent;
+    border-right: 6px solid #fff;
+}
+.date-picker .next-btn {
+    width: 0;
+    width: 0;
+    border-bottom: 6px solid transparent;
+    border-top: 6px solid transparent;
+    border-left: 6px solid #fff;
+}
+.date-picker .body {
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    padding: 2px;
+    height: 210px;
+    overflow: hidden;
+}
+.date-picker .panel {
+    width: 100%;
+    border-collapse: collapse;
+    /*border-spacing: 2px;*/
+    color: #333;
+    background: #fff;
+}
+.date-picker .panel>thead tr {
+    height: 28px;
+}
+.date-picker .panel>tbody tr {
+    height: 24px;
+}
+.date-picker .body-month>.panel tr {
+    height: 53px;
+}
+.date-picker .body-year>.panel tr {
+    height: 55px;
+}
+.date-picker th,
+.date-picker td {
+    text-align: center;
+    
+}
+.date-picker td {
+    cursor: pointer;
+}
+.date-picker .hover-date {
+    background: #ccc;
+    color: #fff;
+    border-radius: 2px;
+}
+.date-picker .weekend {
+    color: #e00;
+}
+.date-picker .out-year,
+.date-picker .pre-month,
+.date-picker .next-month {
+    color: #ccc;
+}
+.date-picker .cur-date {
+    color: #fff;
+    background: #ca2b2b;
+    border-radius: 2px;
+}
+.date-picker .sub-area {
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    margin: 5px 5px 5px 0;
+}
+.date-picker button {
+    font-size: 12px;
+    border: 1px solid #f00;
+    padding: 2px 12px;
+    border-radius: 2px;
+    height: 22px;
+    color: #f00;
+    background: #fff;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.date-picker .to-selected {
+    background: #eee;
+}

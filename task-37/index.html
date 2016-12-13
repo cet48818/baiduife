@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="layer.css">
+    <style>
+        body {
+            height: 5000px;
+        }
+    </style>
+    
+</head>
+<body>
+    <button class="btn1">点我</button>
+    <button class="btn2">另一个我</button>
+    <script src="layer.js"></script>
+    <script>
+       var btn1 = document.querySelector('.btn1');
+       var btn2 = document.querySelector('.btn2');
+
+       btn1.addEventListener('click', function(e) {
+           Layer.open({
+               title: '这是浮出层',
+               content: '这是一个浮出层',
+               btn: ['确定', '取消'],
+               yes: function(index) {
+                   window.location = 'https://www.baidu.com';
+               }
+           });
+       });
+
+       btn2.addEventListener('click', function(e) {
+           Layer.open({
+               title: '这是浮出层2',
+               content: '这是另一个浮出层',
+               yes: function(index) {
+                   window.location = 'https://www.sina.com';
+               }
+           });
+       });
+    </script>
+</body>
+</html>

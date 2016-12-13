@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            height: 3000px;
+        }
+        .container {
+            margin-left: 100px;
+        }
+        .container2 {
+            margin-top: 100px;
+            margin-left: 150px;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+             <!--<table class="sort-table">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>
+                        语文
+                        <div class="sort-area"><i class="asc"></i><i class="desc"></i></div>
+                    </th>
+                    <th>数学</th>
+                    <th>英语</th>
+                    <th>总分</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                <tr>
+                    <td>小明</td>
+                    <td>80</td>
+                    <td>90</td>
+                    <td>70</td>
+                    <td>240</td>
+                </tr>
+                <tr>
+                    <td>小红</td>
+                    <td>90</td>
+                    <td>60</td>
+                    <td>90</td>
+                    <td>240</td>
+                </tr>
+                <tr>
+                    <td>小亮</td>
+                    <td>60</td>
+                    <td>100</td>
+                    <td>70</td>
+                    <td>230</td>
+                </tr>
+                <tr>
+                    <td>小亮</td>
+                    <td>60</td>
+                    <td>100</td>
+                    <td>70</td>
+                    <td>230</td>
+                </tr>
+                <tr>
+                    <td>小亮</td>
+                    <td>60</td>
+                    <td>100</td>
+                    <td>70</td>
+                    <td>230</td>
+                </tr>
+            </tbody>
+        </table>-->
+    </div>
+    <div class="container2"></div>
+    <div class="container3"></div>
+    <script src="sort-table.js"></script>
+    <script>
+        var config = {
+            colName: ['姓名', '语文', '数学', '英语', '总分'],
+            colSort: [[true, true], [true], [true], [true], [true]], // 第一个参数为是否添加搜索, 第二个是按数字搜索还是按文字搜索, 默认按数字搜索
+            tableFreeze: true,
+            tableData: [['明明', 80, 90, 70, 240],
+                        ['红红', 90, 80, 60, 230],
+                        ['亮亮', 60, 70, 50, 180],
+                        ['方方', 100, 20, 90, 210],
+                        ['Sam', 100, 30, 90, 220],
+                        ['Tom', 20, 100, 10, 130],
+                        ['Jack', 40, 100, 10, 150],
+                        ['Nick', 90, 20, 10, 120],
+                        ['兰兰', 10, 20, 90, 120],
+                        ['Jim', 60, 60, 60, 180],
+                        ['Zed', 60, 70, 60, 190],
+            ]
+        }
+    
+        var sortTable = new SortTable('.container');
+        sortTable.init(config);
+        
+        var config2 = {
+            colName: ['姓名', '画画', '唱歌', '跳舞', '总分'],
+            colSort: [[true, true], [true], [true], [true], [true]], // 第一个参数为是否添加搜索, 第二个是按数字搜索还是按文字搜索, 默认按数字搜索
+            tableFreeze: true,
+            tableData: [['小明', 80, 90, 70, 240],
+                        ['大红', 90, 80, 60, 230],
+                        ['小亮', 60, 70, 50, 180],
+                        ['大方', 100, 20, 90, 210],
+                        ['Sam', 100, 30, 90, 220],
+                        ['Tom', 20, 100, 10, 130],
+                        ['Jack', 40, 100, 10, 150],
+                        ['Nick', 90, 20, 10, 120],
+                        ['兰兰', 10, 20, 90, 120],
+                        ['Jim', 60, 60, 60, 180],
+                        ['Zed', 60, 70, 60, 190],
+            ]
+        }
+        var sortTable2 = new SortTable('.container2');
+        sortTable2.init(config2);
+
+        var config3 = {
+            colName: ['姓名', '看书', '下棋', '跳舞', '总分'],
+            colSort: [[true, true], [true], [true], [true], [true]], // 第一个参数为是否添加搜索, 第二个是按数字搜索还是按文字搜索, 默认按数字搜索
+            tableFreeze: true,
+            tableData: [['小明', 80, 90, 70, 240],
+                        ['大红', 90, 80, 60, 230],
+                        ['小亮', 60, 70, 50, 180],
+                        ['大方', 100, 20, 90, 210],
+                        ['Sam', 100, 30, 90, 220],
+                        ['Tom', 20, 100, 10, 130],
+                        ['Jack', 40, 100, 10, 150],
+                        ['Nick', 90, 20, 10, 120],
+                        ['兰兰', 10, 20, 90, 120],
+                        ['Jim', 60, 60, 60, 180],
+                        ['Zed', 60, 70, 60, 190],
+            ]
+        }
+        var sortTable3 = new SortTable('.container3');
+        sortTable3.init(config3);
+    </script>
+</body>
+</html>
