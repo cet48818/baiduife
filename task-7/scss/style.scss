@@ -16,6 +16,11 @@ $font-color: #787b83;
     background: $bgcolor;
     font-size: $font;
     line-height: $height;
+    &:hover {
+        border: 1px solid $bgcolor;
+        color: $bgcolor;
+        background: $color;
+    }
 }
 @mixin triangle($direction:right) {
     border-#{$direction}: 25px solid #fff;
@@ -141,6 +146,9 @@ body {
             background-color: $main-red;
             cursor: pointer;
             user-select: none;
+            &:hover {
+                background-color: darken($main-red, 10%);
+            }
         }
     }
     .intro {
@@ -216,9 +224,23 @@ body {
             font-weight: normal;
         }
         .h-line {
-            @include h-line(32px, 3px);
+            
             @extend .h-center;
             top: 85px;
+            padding: 0 0 10px 0;
+            &:after {
+                content: '';
+                display: block;
+                @include h-line(32px, 3px);
+            }
+            &:hover {
+                &:after {
+                    content: '';
+                    display: block;
+                    @include h-line(220px, 3px);
+                    transition: .5s;
+                }
+            }
         }
         p {
             @extend .h-center;
@@ -302,11 +324,16 @@ body {
             button {
                 @extend .lay;
                 margin-right: 0;
+                padding-bottom: 6px;
                 background: $main-red;
                 color: #fff;
                 text-align: center;
                 font-size: 16px;
-                // letter-spacing: 2em;
+                &:hover {
+                    background-color: darken($main-red, 10%);
+                }
+                letter-spacing: 2em;
+                text-indent: 2em;
             }
         }
     }
@@ -358,11 +385,13 @@ body {
                 }
                &:hover {
                    .frame {
+                       transition: all .4s;
                         @extend .st-frame;
                         top: auto;
                         bottom: 0;
                     }
                     h4 {
+                        transition: all .4s;
                         @extend .h-center;
                         width: 100%;
                         bottom: auto;
@@ -376,6 +405,7 @@ body {
                         white-space: nowrap;
                     }
                     p {
+                        transition: all .4s;
                         @extend .h-center;
                         bottom: auto;
                         top: 34px;
@@ -419,43 +449,21 @@ body {
                 margin-left: -30px;
             }
         }
-        .r-sec {
+        .r-sec-container {
             // float: left;
             // width: (1 - (850 / 1280)) * 100%;
             position: relative;
             margin-left: 850px;
             height: 566px - 164;
-            text-align: center;
             padding-top: 164px;
-            
-            .title-n {
-                font-size: 20px;
-                font-weight: bold;
-                color: #333;
-                i {
-                    margin: 0 10px 0 8px;
-                    display: inline-block;
-                    transform: scaleX(1.3);
-                    font-weight: normal;
-                }
-                strong {
-                    font-size: 20px;
-                    color: $main-red;
-                }
-            }
-            .text-content {
-                margin: 30px auto 0;
-                width: 290px;
-                line-height: 2.5;
-                text-align: left;
-            }
-            .detail-btn {
-                @include a-button($width:106px, $height:34px, $border:$main-red, $color:$main-red, $bgcolor:#fff, $font:14px);
-                margin: 45px auto 0;
-            }
             .dots {
+                position: absolute;
+                bottom: 25px;
+                left: 50%;
                 width: 13px * 3 + 15 * 2;
-                margin: 25px auto 0;
+                margin-left: - (13px * 3 + 15 * 2) / 2;
+                
+                // margin: 25px auto 0;
                 .dot {
                     float: left;
                     border: 1px solid $font-color;
@@ -463,7 +471,7 @@ body {
                     border-radius: 50%;
                     width: 11px;
                     height: 11px;
-                    
+                    cursor: pointer;
                 }
                 .dot:last-child {
                     margin-right: 0;
@@ -472,10 +480,40 @@ body {
                     background: $font-color;
                 }
             }
-            .triangle1 {
-                @include triangle;
-                @extend .v-center;
-                left: -25px;
+            .r-sec {
+
+                text-align: center;
+                
+                .title-n {
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #333;
+                    i {
+                        margin: 0 10px 0 8px;
+                        display: inline-block;
+                        transform: scaleX(1.3);
+                        font-weight: normal;
+                    }
+                    strong {
+                        font-size: 20px;
+                        color: $main-red;
+                    }
+                }
+                .text-content {
+                    margin: 30px auto 0;
+                    width: 290px;
+                    line-height: 2.5;
+                    text-align: left;
+                }
+                .detail-btn {
+                    @include a-button($width:106px, $height:34px, $border:$main-red, $color:$main-red, $bgcolor:#fff, $font:14px);
+                    margin: 45px auto 0;
+                }
+                .triangle1 {
+                    @include triangle;
+                    @extend .v-center;
+                    left: -25px;
+                }
             }
         }
     }
@@ -494,11 +532,24 @@ body {
                 margin-top: 10px;
             }
             .line-1 {
-                @include h-line(30px, 2px, #fff);
-                margin: 24px auto;
+                // @include h-line(30px, 2px, #fff);
+                margin: 0 auto;
+                padding: 24px 0;
+                &:after {
+                    content: '';
+                    display: block;
+                    margin: 0 auto;
+                    @include h-line(30px, 2px, #fff);
+                }
                 &:hover {
+                    // @include h-line(170px, 2px, #fff);
+                    &:after {
+                    content: '';
+                    display: block;
+                    margin: 0 auto;
                     @include h-line(170px, 2px, #fff);
                     transition: .5s;
+                }
                 }
             }
             .detail-btn {
@@ -512,9 +563,22 @@ body {
             color: #333;
             background: #fff;
             .line-1 {
-                @include h-line(30px, 2px, $main-red);
+                margin: 0 auto;
+                padding: 24px 0;
+                &:after {
+                    content: '';
+                    display: block;
+                    margin: 0 auto;
+                    @include h-line(30px, 2px, $main-red);
+                }
                 &:hover {
-                    @include h-line(170px, 2px, $main-red);
+                    &:after {
+                        content: '';
+                        display: block;
+                        margin: 0 auto;
+                        @include h-line(170px, 2px, $main-red);
+                        transition: .5s;
+                    }
                 }
             }
             .detail-btn {
@@ -547,11 +611,21 @@ body {
             }
         }
         .line-2 {
-            @include h-line(30px, 2px, $main-red);
-            margin: 16px auto;
+            padding: 16px 0;
+            &:after {
+                content: '';
+                display: block;
+                @include h-line(30px, 2px, $main-red);
+                margin: 0 auto;
+            }
             &:hover {
-                @include h-line(160px, 2px, $main-red);
-                transition: .3s;
+                &:after {
+                    content: '';
+                    display: block;
+                    margin: 0 auto;
+                    @include h-line(160px, 2px, $main-red);
+                    transition: .3s;
+                }
             }
         }
         p {
@@ -569,6 +643,7 @@ body {
                 width: 292px;
                 height: 100%;
                 .sec1 {
+                    position: relative;
                     text-align: left;
                     margin-bottom: 36px;
                     h4 {
@@ -576,11 +651,32 @@ body {
                         margin-bottom: 24px;
                     }
                     p {
+                        position: absolute;
+                        left: 0;
+                        top: 40px;
                         width: 100%;
+                        height: 48px;
                         line-height: 2;
+                        background: #fff;
+                        // white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        &:after {
+                            content:"......";
+                            display: inline-block;
+                            font-weight:bold;
+                            position:absolute;
+                            bottom:0;
+                            right:0;
+                            padding-left: .5em;
+                            padding-right: 1em;
+                            background-color: #fff;
+                        }
                     }
                     .more {
-                        float: right;
+                        position: absolute;
+                        right: 0;
+                        top: 88px;
                         color: $font-color;
                         &:before {
                             content: '';
@@ -594,11 +690,16 @@ body {
                 }
                 .sec2 {
                     @extend .sec1;
+                    top: 75px;
                 }
                 .sec3 {
                     @extend .sec1;
+                    top: 148px;
                     h4 {
                         margin-bottom: 0;
+                    }
+                    .more {
+                        top: 16px;
                     }
                     margin-bottom: 0;
                 }
@@ -683,6 +784,10 @@ body {
                 border: none;
                 background: #6f7278;
                 color: #fff;
+                cursor: pointer;
+                &:hover {
+                    background-color: lighten(#6f7278, 10%);
+                }
             }
         }
         .contacts {

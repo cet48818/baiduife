@@ -1,0 +1,29 @@
+$mainGrey: #efefef;
+$lightBlue: #58b7ff;
+$blue: #20a0ff;
+$black: #1f2d3d;
+
+body,
+html {
+  font: 14px 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif;
+  font-weight: 400;
+}
+
+.clearfix {
+  display: inline-block;
+  &:after {
+      display: block;
+      content: '';
+      height: 0;
+      line-height: 0;
+      clear: both;
+      visibility: hidden;
+  }
+}
+
+.wrapper {
+    width: 80%;
+    margin: 30px auto 0;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    background: #fff;
+}

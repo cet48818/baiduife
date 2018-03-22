@@ -1,10 +1,14 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
+var connect = require('gulp-connect');
+var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('sass', function () {
     return gulp.src('scss/*.scss')
+        .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
+        .pipe(sourcemaps.write())
         .pipe(autoprefixer({
             browsers: ['last 2 versions', 'Android >= 4.0'],
             cascade: true,
@@ -34,4 +38,10 @@ gulp.task('fonts', function() {
 //         .pipe(gulp.dest('./css'));
 // });
 
-gulp.task('default', ['sass','watch','fonts']);
+gulp.task('connect', function() {
+  connect.server({
+      port: 8000
+  });
+});
+
+gulp.task('default', ['sass','watch','fonts','connect']);

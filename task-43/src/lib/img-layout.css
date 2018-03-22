@@ -1,0 +1,56 @@
+.pieceLayout-container {
+  /* position: relative; */
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  overflow: hidden;
+}
+.pieceLayout-imgWrapper {
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+  /* left: 0;
+  top: 0; */
+  overflow: hidden;
+}
+.pieceLayout-img {
+  /* position: absolute;
+  left: 0;
+  top: 0; */
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pieceLayout-clipLeft {
+  position: absolute;
+  left: 0;
+  top: 0;
+  clip-path: polygon(0 0, 66.66% 0, 33.33% 100%, 0 100%); 
+}
+
+.pieceLayout-clipRight {
+  position: absolute;
+  left: 0;
+  top: 0;
+  clip-path: polygon(66.66% 0, 100% 0, 100% 100%, 33.33% 100%);
+}
+
+.pieceLayout-imgLeft {
+  /* left: -25%; */
+   object-position: 250% 50%; 
+}
+.pieceLayout-imgRight {
+  object-position: -150% 50%;
+}
+.pieceLayout-imgWrapper4 {
+  display: flex;
+  flex-flow: column wrap;
+}
+.pieceLayout-imgFloat {
+  float: left;
+}
+.pieceLayout-innerContainer {
+  display: flex;
+  flex-flow: row nowrap;
+} 

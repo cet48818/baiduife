@@ -1,0 +1,20 @@
+var image1 = require('./images/image1.png');
+var image2 = require('./images/image2.png');
+var image3 = require('./images/image3.png');
+var image4 = require('./images/image4.png');
+var image5 = require('./images/image5.png');
+var image6 = require('./images/image6.png');
+
+var PieceLayout = require('./lib/img-layout.js');
+var demo1 = document.querySelector('#demo1');
+var demo2 = document.querySelector('#demo2');
+var demo3 = document.querySelector('#demo3');
+var demo4 = document.querySelector('#demo4');
+var demo5 = document.querySelector('#demo5');
+var demo6 = document.querySelector('#demo6');
+new PieceLayout(demo1, [image1]);
+new PieceLayout(demo2, [image1, image2]);
+new PieceLayout(demo3, [image1, image2, image2]);
+new PieceLayout(demo4, [image1, image2, image3, image4]);
+new PieceLayout(demo5, [image1, image2, image3, image4, image5]);
+new PieceLayout(demo6, [image1, image2, image3, image4, image5, image6]);
